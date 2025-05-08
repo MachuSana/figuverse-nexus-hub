@@ -13,10 +13,13 @@ import LicenseCard from '@/components/LicenseCard';
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-// Définition du schéma de filtre
+// Define the ViewStyle type to match LicenseCard's expected values
+type ViewStyle = 'grid' | 'list' | 'large';
+
+// Définition du schéma de filtre with proper types
 const filterSchema = z.object({
   sort: z.string().default("az"),
-  view: z.string().default("grid"),
+  view: z.enum(["grid", "list", "large"]).default("grid"),
   type: z.string().default("all"),
 });
 
@@ -142,8 +145,8 @@ const Licenses = () => {
     return filtered;
   };
   
-  const filteredLicenses = getFilteredLicenses();
-  const viewStyle = form.watch("view");
+  // Get the view style as an explicitly typed value
+  const viewStyle = form.watch("view") as ViewStyle;
 
   return (
     <>
