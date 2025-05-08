@@ -10,6 +10,8 @@ import Figurines from "./pages/Figurines";
 import FigurineDetail from "./pages/FigurineDetail";
 import Licenses from "./pages/Licenses";
 import LicenseDetail from "./pages/LicenseDetail";
+import Manufacturers from "./pages/Manufacturers";
+import ManufacturerDetail from "./pages/ManufacturerDetail";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +27,8 @@ const App = () => (
           <Route path="/figurine/:id" element={<FigurineDetail />} />
           <Route path="/licences" element={<Licenses />} />
           <Route path="/licence/:id" element={<LicenseDetail />} />
+          <Route path="/fabricants" element={<Manufacturers />} />
+          <Route path="/fabricant/:id" element={<ManufacturerDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
@@ -34,4 +38,3 @@ const App = () => (
 );
 
 export default App;
-
