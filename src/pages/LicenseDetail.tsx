@@ -362,12 +362,14 @@ const LicenseDetail = () => {
                   <FigurineCard 
                     id={figurine.id} 
                     name={figurine.name} 
-                    series={figurine.series} 
-                    price={figurine.price} 
-                    imageUrl={figurine.image} 
-                    licenceName={license.name} 
-                    isNewRelease={false} 
-                    viewStyle="grid" 
+                    character={figurine.name}  // Use name as character since it's required
+                    license={license.name}
+                    manufacturer={figurine.series || "Unknown"} // Map series to manufacturer
+                    price={figurine.price}
+                    currency="€"
+                    image={figurine.image}
+                    isNew={false}
+                    isFavorite={false}
                   />
                 </CarouselItem>
               ))}
@@ -384,4 +386,3 @@ const LicenseDetail = () => {
 };
 
 export default LicenseDetail;
-
