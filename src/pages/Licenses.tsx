@@ -145,6 +145,9 @@ const Licenses = () => {
     return filtered;
   };
   
+  // Get the filtered licenses by executing the function
+  const filteredLicenses = getFilteredLicenses();
+  
   // Get the view style as an explicitly typed value
   const viewStyle = form.watch("view") as ViewStyle;
 
