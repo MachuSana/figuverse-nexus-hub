@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -286,12 +287,14 @@ const LicenseDetail = () => {
   const { data: license, isLoading, error } = useQuery({
     queryKey: ['license', licenseId],
     queryFn: () => fetchLicenseDetails(licenseId),
-    onError: () => {
-      toast({
-        title: "Erreur",
-        description: "Impossible de charger les détails de cette licence.",
-        variant: "destructive"
-      });
+    meta: {
+      onError: () => {
+        toast({
+          title: "Erreur",
+          description: "Impossible de charger les détails de cette licence.",
+          variant: "destructive"
+        });
+      }
     }
   });
   
