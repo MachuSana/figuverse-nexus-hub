@@ -1,11 +1,12 @@
 
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Facebook, Instagram, Twitter, Youtube, Link, Share, ChevronRight } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube, Link as LinkIcon, Share, ChevronRight } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FigurineCard from '@/components/FigurineCard';
@@ -101,11 +102,176 @@ const fetchLicenseDetails = async (id: string) => {
         { id: '401', name: 'Naruto Mode Sage', series: 'G.E.M.', price: 119.99, image: 'https://images.unsplash.com/photo-1613376023733-0a73315d9b1f' },
         { id: '402', name: 'Sasuke Uchiha Rinnegan', series: 'S.H.Figuarts', price: 109.99, image: 'https://images.unsplash.com/photo-1580477667995-2b94f01c9516' }
       ]
+    },
+    { 
+      id: '3', 
+      name: 'Dragon Ball', 
+      studio: 'Toei Animation', 
+      type: 'Anime/Manga', 
+      description: 'Dragon Ball raconte l\'histoire de Son Goku, de son enfance à l\'âge adulte, s\'entraînant aux arts martiaux et explorant le monde à la recherche des Dragon Balls, sept boules de cristal magiques qui invoquent un dragon capable d\'exaucer un vœu lorsqu\'elles sont réunies.',
+      tags: ['Shonen', 'Arts Martiaux', 'Combat', 'Fantasy'],
+      figurineCount: 320, 
+      image: 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      bannerImage: 'https://images.unsplash.com/photo-1481018085669-2bc6e4f00aba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      socialLinks: {
+        facebook: 'https://facebook.com/dragonballofficial',
+        twitter: 'https://twitter.com/dragonballofficial',
+        instagram: 'https://instagram.com/dragonballofficial',
+        youtube: 'https://youtube.com/dragonballofficial',
+        website: 'https://dragonball.com'
+      },
+      timeline: [
+        { year: 1984, event: 'Début du manga dans Weekly Shōnen Jump' },
+        { year: 1986, event: 'Début de l\'anime TV par Toei Animation' },
+        { year: 1989, event: 'Début de Dragon Ball Z' },
+        { year: 2015, event: 'Début de Dragon Ball Super' },
+        { year: 2022, event: 'Sortie de Dragon Ball Super: Super Hero' }
+      ],
+      characters: [
+        { id: '301', name: 'Son Goku', role: 'Protagoniste', image: 'https://images.unsplash.com/photo-1580477667995-2b94f01c9516?ixlib=rb-4.0.3' },
+        { id: '302', name: 'Vegeta', role: 'Rival/Allié', image: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3' },
+        { id: '303', name: 'Piccolo', role: 'Allié', image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3' }
+      ],
+      news: [
+        { id: '401', title: 'Nouveau film Dragon Ball annoncé', date: '2023-09-25', image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5' }
+      ],
+      gallery: [
+        'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5',
+        'https://images.unsplash.com/photo-1500673922987-e212871fec22',
+        'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05'
+      ],
+      figurines: [
+        { id: '501', name: 'Goku Ultra Instinct', series: 'S.H.Figuarts', price: 129.99, image: 'https://images.unsplash.com/photo-1613376023733-0a73315d9b1f' },
+        { id: '502', name: 'Vegeta Super Saiyan Blue', series: 'Grandista', price: 99.99, image: 'https://images.unsplash.com/photo-1580477667995-2b94f01c9516' }
+      ]
+    },
+    { 
+      id: '4', 
+      name: 'My Hero Academia', 
+      studio: 'Bones', 
+      type: 'Anime/Manga', 
+      description: 'My Hero Academia se déroule dans un monde où 80% de la population mondiale possède des super-pouvoirs, appelés "Alters". L\'histoire suit Izuku Midoriya, né sans Alter, qui rêve de devenir un héros comme son idole All Might, le plus grand des héros.',
+      tags: ['Shonen', 'Super-héros', 'Action', 'École'],
+      figurineCount: 145, 
+      image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      bannerImage: 'https://images.unsplash.com/photo-1463947628408-f8581a2f4aca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      socialLinks: {
+        facebook: 'https://facebook.com/myheroacademia',
+        twitter: 'https://twitter.com/myheroacademia',
+        instagram: 'https://instagram.com/myheroacademia',
+        website: 'https://myheroacademia.com'
+      },
+      timeline: [
+        { year: 2014, event: 'Début du manga dans Weekly Shōnen Jump' },
+        { year: 2016, event: 'Début de l\'anime TV par Studio Bones' },
+        { year: 2018, event: 'Premier film: Two Heroes' },
+        { year: 2021, event: 'Troisième film: World Heroes' Mission' }
+      ],
+      characters: [
+        { id: '401', name: 'Izuku Midoriya', role: 'Protagoniste', image: 'https://images.unsplash.com/photo-1580477667995-2b94f01c9516?ixlib=rb-4.0.3' },
+        { id: '402', name: 'Katsuki Bakugo', role: 'Rival', image: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3' }
+      ],
+      news: [
+        { id: '501', title: 'Nouvelle saison de l\'anime confirmée', date: '2023-11-05', image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5' }
+      ],
+      gallery: [
+        'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5',
+        'https://images.unsplash.com/photo-1500673922987-e212871fec22'
+      ],
+      figurines: [
+        { id: '601', name: 'Deku Full Cowl', series: 'Amazing Yamaguchi', price: 99.99, image: 'https://images.unsplash.com/photo-1613376023733-0a73315d9b1f' },
+        { id: '602', name: 'All Might Silver Age', series: 'Banpresto', price: 79.99, image: 'https://images.unsplash.com/photo-1580477667995-2b94f01c9516' }
+      ]
+    },
+    { 
+      id: '5', 
+      name: 'Attack on Titan', 
+      studio: 'MAPPA', 
+      type: 'Anime/Manga', 
+      description: 'Attack on Titan se déroule dans un monde où l\'humanité vit regroupée dans des villes entourées d\'immenses murs pour se protéger de créatures humanoïdes géantes, les Titans. L\'histoire suit Eren Yeager qui, après avoir vu sa mère dévorée par un Titan, jure de les éliminer tous.',
+      tags: ['Shonen', 'Dark Fantasy', 'Action', 'Post-apocalyptique'],
+      figurineCount: 92, 
+      image: 'https://images.unsplash.com/photo-1483389127117-b6a2102724ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      bannerImage: 'https://images.unsplash.com/photo-1520034475321-cbe63696469a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      socialLinks: {
+        twitter: 'https://twitter.com/attackontitan',
+        instagram: 'https://instagram.com/attackontitan',
+        youtube: 'https://youtube.com/attackontitan',
+        website: 'https://attackontitan.com'
+      },
+      timeline: [
+        { year: 2009, event: 'Début du manga dans Bessatsu Shōnen Magazine' },
+        { year: 2013, event: 'Début de l\'anime TV par WIT Studio' },
+        { year: 2020, event: 'MAPPA reprend l\'animation pour la saison finale' },
+        { year: 2023, event: 'Fin de l\'anime' }
+      ],
+      characters: [
+        { id: '501', name: 'Eren Yeager', role: 'Protagoniste', image: 'https://images.unsplash.com/photo-1580477667995-2b94f01c9516?ixlib=rb-4.0.3' },
+        { id: '502', name: 'Mikasa Ackerman', role: 'Protectrice', image: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3' }
+      ],
+      news: [
+        { id: '601', title: 'Exposition Attack on Titan à Tokyo', date: '2023-08-12', image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5' }
+      ],
+      gallery: [
+        'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5',
+        'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05'
+      ],
+      figurines: [
+        { id: '701', name: 'Eren Titan Form', series: 'Kotobukiya ARTFX J', price: 149.99, image: 'https://images.unsplash.com/photo-1613376023733-0a73315d9b1f' },
+        { id: '702', name: 'Levi Ackerman', series: 'Good Smile Company', price: 119.99, image: 'https://images.unsplash.com/photo-1580477667995-2b94f01c9516' }
+      ]
+    },
+    { 
+      id: '6', 
+      name: 'Demon Slayer', 
+      studio: 'ufotable', 
+      type: 'Anime/Manga', 
+      description: 'Demon Slayer raconte l\'histoire de Tanjiro Kamado, un jeune garçon devenu chasseur de démons après que sa famille ait été massacrée par un démon et que sa sœur Nezuko, seule survivante, ait été transformée en démon.',
+      tags: ['Shonen', 'Action', 'Surnaturel', 'Historique'],
+      figurineCount: 132, 
+      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80',
+      bannerImage: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      socialLinks: {
+        facebook: 'https://facebook.com/demonslayer',
+        twitter: 'https://twitter.com/demonslayer',
+        instagram: 'https://instagram.com/demonslayer',
+        youtube: 'https://youtube.com/demonslayer',
+        website: 'https://demonslayer.com'
+      },
+      timeline: [
+        { year: 2016, event: 'Début du manga dans Weekly Shōnen Jump' },
+        { year: 2019, event: 'Début de l\'anime TV par ufotable' },
+        { year: 2020, event: 'Sortie du film Mugen Train' },
+        { year: 2021, event: 'Arc de l\'Entertainment District' },
+        { year: 2023, event: 'Arc du Village des Forgerons' }
+      ],
+      characters: [
+        { id: '601', name: 'Tanjiro Kamado', role: 'Protagoniste', image: 'https://images.unsplash.com/photo-1580477667995-2b94f01c9516?ixlib=rb-4.0.3' },
+        { id: '602', name: 'Nezuko Kamado', role: 'Sœur', image: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3' },
+        { id: '603', name: 'Zenitsu Agatsuma', role: 'Allié', image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3' }
+      ],
+      news: [
+        { id: '701', title: 'Nouvelle saison annoncée', date: '2023-12-10', image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5' },
+        { id: '702', title: 'Figurines exclusives en précommande', date: '2023-11-28', image: 'https://images.unsplash.com/photo-1500673922987-e212871fec22' }
+      ],
+      gallery: [
+        'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5',
+        'https://images.unsplash.com/photo-1500673922987-e212871fec22',
+        'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05',
+        'https://images.unsplash.com/photo-1466442929976-97f336a657be'
+      ],
+      figurines: [
+        { id: '801', name: 'Tanjiro Kamado', series: 'Aniplex', price: 139.99, image: 'https://images.unsplash.com/photo-1613376023733-0a73315d9b1f' },
+        { id: '802', name: 'Nezuko Kamado', series: 'Bandai Ichibansho', price: 89.99, image: 'https://images.unsplash.com/photo-1580477667995-2b94f01c9516' },
+        { id: '803', name: 'Rengoku Kyojuro', series: 'Megahouse', price: 159.99, image: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7' }
+      ]
     }
   ];
   
+  // Attempt to find the license by ID
   const license = licenses.find(l => l.id === id);
   
+  // If no license found, throw an error to trigger the error boundary
   if (!license) {
     throw new Error("License not found");
   }
@@ -116,10 +282,18 @@ const fetchLicenseDetails = async (id: string) => {
 const LicenseDetail = () => {
   const { id } = useParams<{ id: string }>();
   const licenseId = id || '1';  // Default to ID 1 if none provided
+  const { toast } = useToast();
   
   const { data: license, isLoading, error } = useQuery({
     queryKey: ['license', licenseId],
-    queryFn: () => fetchLicenseDetails(licenseId)
+    queryFn: () => fetchLicenseDetails(licenseId),
+    onError: () => {
+      toast({
+        title: "Erreur",
+        description: "Impossible de charger les détails de cette licence.",
+        variant: "destructive"
+      });
+    }
   });
   
   if (isLoading) {
@@ -144,6 +318,9 @@ const LicenseDetail = () => {
           <div className="flex flex-col justify-center items-center h-96">
             <h1 className="text-2xl font-bold text-red-500">Erreur</h1>
             <p className="mt-4">Impossible de charger les détails de cette licence.</p>
+            <Link to="/licences">
+              <Button className="mt-6">Retourner à la liste des licences</Button>
+            </Link>
           </div>
         </main>
         <Footer />
@@ -207,7 +384,7 @@ const LicenseDetail = () => {
             {license.socialLinks.website && (
               <a href={license.socialLinks.website} target="_blank" rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 flex items-center justify-center text-white">
-                <Link size={18} />
+                <LinkIcon size={18} />
               </a>
             )}
           </div>
@@ -386,3 +563,4 @@ const LicenseDetail = () => {
 };
 
 export default LicenseDetail;
+
