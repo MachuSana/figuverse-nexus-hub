@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -44,7 +43,7 @@ const fetchLicenseDetails = async (id: string) => {
         { id: '101', name: 'Monkey D. Luffy', role: 'Capitaine', image: 'https://images.unsplash.com/photo-1580477667995-2b94f01c9516?ixlib=rb-4.0.3' },
         { id: '102', name: 'Roronoa Zoro', role: 'Bretteur', image: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3' },
         { id: '103', name: 'Nami', role: 'Navigatrice', image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3' },
-        { id: '104', name: 'Usopp', role: 'Tireur', image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3' }
+        { id: '104', name: 'Usopp', role: 'Tireur', image: 'https://images.unsplash.com/photo-1466442929976-97f336a657be?ixlib=rb-4.0.3' }
       ],
       news: [
         { id: '201', title: 'Nouvel arc annoncé pour 2024', date: '2023-12-15', image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5' },
@@ -165,7 +164,7 @@ const fetchLicenseDetails = async (id: string) => {
         { year: 2014, event: 'Début du manga dans Weekly Shōnen Jump' },
         { year: 2016, event: 'Début de l\'anime TV par Studio Bones' },
         { year: 2018, event: 'Premier film: Two Heroes' },
-        { year: 2021, event: 'Troisième film: World Heroes' Mission' }
+        { year: 2021, event: 'Troisième film: World Heroes Mission' }
       ],
       characters: [
         { id: '401', name: 'Izuku Midoriya', role: 'Protagoniste', image: 'https://images.unsplash.com/photo-1580477667995-2b94f01c9516?ixlib=rb-4.0.3' },
@@ -563,4 +562,3 @@ const LicenseDetail = () => {
 };
 
 export default LicenseDetail;
-
