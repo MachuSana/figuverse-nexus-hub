@@ -1,15 +1,26 @@
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Search, Menu, X, ShoppingCart, Heart, User } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Search, Menu, X, Heart, User, Home, Box, Award, Newspaper, Calendar, LogIn } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleSearch = () => setIsSearchOpen(!isSearchOpen);
+
+  const isActive = (path: string) => location.pathname === path;
+
+  const menuItems = [
+    { name: "Accueil", path: "/", icon: Home },
+    { name: "Figurines", path: "/figurines", icon: Box },
+    { name: "Licences", path: "/licences", icon: Award },
+    { name: "Actualités", path: "/news", icon: Newspaper },
+    { name: "Planning", path: "/planning", icon: Calendar },
+  ];
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -22,21 +33,16 @@ const Header: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <Link to="/figurines" className="text-gray-700 hover:text-figuverse-red transition-colors">
-              Figurines
-            </Link>
-            <Link to="/licences" className="text-gray-700 hover:text-figuverse-red transition-colors">
-              Licences
-            </Link>
-            <Link to="/fabricants" className="text-gray-700 hover:text-figuverse-red transition-colors">
-              Fabricants
-            </Link>
-            <Link to="/news" className="text-gray-700 hover:text-figuverse-red transition-colors">
-              Actualités
-            </Link>
-            <Link to="/planning" className="text-gray-700 hover:text-figuverse-red transition-colors">
-              Planning
-            </Link>
+            {menuItems.map((item) => (
+              <Link 
+                key={item.path}
+                to={item.path} 
+                className={`flex items-center space-x-2 ${isActive(item.path) ? 'text-figuverse-red font-medium' : 'text-gray-700 hover:text-figuverse-red'} transition-colors`}
+              >
+                <item.icon className="h-4 w-4" />
+                <span>{item.name}</span>
+              </Link>
+            ))}
           </nav>
 
           {/* Actions */}
@@ -44,18 +50,21 @@ const Header: React.FC = () => {
             <button 
               onClick={toggleSearch}
               className="text-gray-700 hover:text-figuverse-red transition-colors"
+              aria-label="Rechercher"
             >
               <Search className="h-5 w-5" />
             </button>
-            <Link to="/favorites" className="hidden md:block text-gray-700 hover:text-figuverse-red transition-colors">
+            <Link to="/favorites" className="hidden md:block text-gray-700 hover:text-figuverse-red transition-colors" aria-label="Favoris">
               <Heart className="h-5 w-5" />
             </Link>
-            <Link to="/login" className="hidden md:block text-gray-700 hover:text-figuverse-red transition-colors">
-              <User className="h-5 w-5" />
+            <Link to="/login" className="hidden md:flex items-center space-x-2 text-gray-700 hover:text-figuverse-red transition-colors">
+              <LogIn className="h-5 w-5" />
+              <span>Connexion</span>
             </Link>
             <button 
               className="md:hidden text-gray-700"
               onClick={toggleMenu}
+              aria-label="Menu"
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -83,27 +92,22 @@ const Header: React.FC = () => {
       {isMenuOpen && (
         <nav className="md:hidden bg-white border-t animate-fade-in">
           <div className="container px-4 py-3 mx-auto space-y-3">
-            <Link to="/figurines" className="block text-gray-700 hover:text-figuverse-red transition-colors">
-              Figurines
-            </Link>
-            <Link to="/licences" className="block text-gray-700 hover:text-figuverse-red transition-colors">
-              Licences
-            </Link>
-            <Link to="/fabricants" className="block text-gray-700 hover:text-figuverse-red transition-colors">
-              Fabricants
-            </Link>
-            <Link to="/news" className="block text-gray-700 hover:text-figuverse-red transition-colors">
-              Actualités
-            </Link>
-            <Link to="/planning" className="block text-gray-700 hover:text-figuverse-red transition-colors">
-              Planning
-            </Link>
+            {menuItems.map((item) => (
+              <Link 
+                key={item.path}
+                to={item.path} 
+                className={`flex items-center space-x-3 ${isActive(item.path) ? 'text-figuverse-red font-medium' : 'text-gray-700 hover:text-figuverse-red'} transition-colors`}
+              >
+                <item.icon className="h-5 w-5" />
+                <span>{item.name}</span>
+              </Link>
+            ))}
             <div className="pt-2 border-t flex space-x-4">
               <Link to="/favorites" className="text-gray-700 hover:text-figuverse-red transition-colors flex items-center">
                 <Heart className="h-5 w-5 mr-2" /> Favoris
               </Link>
               <Link to="/login" className="text-gray-700 hover:text-figuverse-red transition-colors flex items-center">
-                <User className="h-5 w-5 mr-2" /> Compte
+                <LogIn className="h-5 w-5 mr-2" /> Connexion
               </Link>
             </div>
           </div>
