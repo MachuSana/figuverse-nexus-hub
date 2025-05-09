@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -102,6 +101,49 @@ const fetchManufacturerDetails = async (manufacturerId: string) => {
         { id: '306', user: 'DBZFanatic', rating: 4, comment: 'Figurines Dragon Ball de très bonne qualité. Articulations parfois un peu fragiles.', date: '2023-10-18' },
         { id: '307', user: 'TokyoCollector', rating: 3, comment: 'Qualité variable selon les gammes, mais généralement bon rapport qualité/prix.', date: '2023-09-25' },
       ]
+    },
+    {
+      id: '3',
+      name: 'Kotobukiya',
+      logo: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      bannerImage: 'https://images.unsplash.com/photo-1493962853295-0fd70327578a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+      description: 'Kotobukiya est un fabricant japonais spécialisé dans les figurines et maquettes de haute qualité. Fondée en 1953, la société s\'est d\'abord concentrée sur les jouets avant de se spécialiser dans les modèles à assembler et les figurines statiques. Connue pour ses séries ARTFX et ARTFX J, Kotobukiya propose des figurines détaillées basées sur des personnages d\'anime, de jeux vidéo, de films et de comics. Leur ligne Frame Arms propose également des modèles de mecha personnalisables très populaires parmi les amateurs de modélisme.',
+      type: 'Premium',
+      country: 'Japon',
+      foundedYear: 1953,
+      headquarters: 'Tokyo, Japon',
+      website: 'https://www.kotobukiya.co.jp',
+      tags: ['ARTFX', 'Bishoujo', 'Frame Arms', 'Modèles à assembler', 'Comics', 'Jeux Vidéo'],
+      figurineCount: 856,
+      rating: 4.5,
+      socialLinks: {
+        facebook: 'https://facebook.com/kotobukiya',
+        twitter: 'https://twitter.com/kotobukiya',
+        instagram: 'https://instagram.com/kotobukiya_official',
+        youtube: 'https://youtube.com/kotobukiyachannel',
+      },
+      timeline: [
+        { year: 1953, event: 'Fondation de Kotobukiya en tant que magasin de jouets' },
+        { year: 1985, event: 'Début de la production de figurines originales' },
+        { year: 2003, event: 'Lancement de la série ARTFX' },
+        { year: 2009, event: 'Création des figurines Bishoujo avec Shunya Yamashita' },
+        { year: 2015, event: 'Introduction de la ligne Cu-poche de figurines chibi articulées' },
+      ],
+      series: [
+        { id: '107', name: 'ARTFX', figurineCount: 320, image: 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+        { id: '108', name: 'Bishoujo', figurineCount: 180, image: 'https://images.unsplash.com/photo-1517022812141-23620dba5c23?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+        { id: '109', name: 'Frame Arms', figurineCount: 95, image: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      ],
+      topFigurines: [
+        { id: '208', name: 'Marvel: ARTFX Premier Iron Man', image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', price: 18000, rating: 4.6, releaseDate: '2021-10-20' },
+        { id: '209', name: 'DC Comics: Batwoman Bishoujo Statue', image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', price: 12500, rating: 4.7, releaseDate: '2020-09-15' },
+        { id: '210', name: 'Frame Arms: Baselard', image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', price: 7800, rating: 4.4, releaseDate: '2022-03-10' },
+      ],
+      reviews: [
+        { id: '308', user: 'StatueAddict', rating: 5, comment: 'Les finitions sont impeccables sur tous leurs produits ARTFX Premier', date: '2023-11-05' },
+        { id: '309', user: 'ComicsFan', rating: 4, comment: 'Collection Bishoujo superbe, petit bémol sur les emballages un peu fragiles', date: '2023-10-12' },
+        { id: '310', user: 'MechaBuilder', rating: 5, comment: 'Frame Arms est une révélation! Tellement de possibilités de personnalisation', date: '2023-09-30' },
+      ]
     }
   ];
   
@@ -199,20 +241,23 @@ const Review = ({ review }: { review: { user: string; rating: number; comment: s
 };
 
 const ManufacturerDetail = () => {
-  const { id: manufacturerId } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>();
   const { toast } = useToast();
   
-  // Si l'ID n'est pas défini, on en met un par défaut pour éviter les erreurs
-  const safeManufacturerId = manufacturerId || '1';
-  
+  // S'assurer que l'ID est correctement passé à la requête
   const { data: manufacturer, isLoading, error } = useQuery({
-    queryKey: ['manufacturer', safeManufacturerId],
-    queryFn: () => fetchManufacturerDetails(safeManufacturerId),
+    queryKey: ['manufacturer', id],
+    queryFn: () => {
+      if (!id) {
+        throw new Error("ID de fabricant manquant");
+      }
+      return fetchManufacturerDetails(id);
+    },
     meta: {
-      onError: () => {
+      onError: (error: Error) => {
         toast({
           title: "Erreur",
-          description: "Impossible de charger les détails de ce fabricant.",
+          description: error.message || "Impossible de charger les détails de ce fabricant.",
           variant: "destructive"
         });
       }
