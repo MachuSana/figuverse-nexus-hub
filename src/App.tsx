@@ -13,6 +13,7 @@ import LicenseDetail from "./pages/LicenseDetail";
 import Manufacturers from "./pages/Manufacturers";
 import ManufacturerDetail from "./pages/ManufacturerDetail";
 import News from "./pages/News";
+import ReleasePlanning from "./pages/ReleasePlanning";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/fabricants" element={<Manufacturers />} />
           <Route path="/fabricant/:id" element={<ManufacturerDetail />} />
           <Route path="/news" element={<News />} />
+          <Route path="/planning" element={<ReleasePlanning />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
