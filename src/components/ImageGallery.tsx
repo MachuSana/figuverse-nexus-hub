@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
-import { Gallery, Image } from "lucide-react";
+import { Image, Grid } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface ImageGalleryProps {
