@@ -6,7 +6,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { ArrowDownAZ, ArrowUpZA, Filter, Grid2X2, Image, List } from "lucide-react";
+import { ArrowDownAZ, ArrowUpZA, Filter, Grid2X2, Image, List, Star } from "lucide-react";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ManufacturerCard from '@/components/ManufacturerCard';
