@@ -16,8 +16,11 @@ import News from "./pages/News";
 import ReleasePlanning from "./pages/ReleasePlanning";
 import EventDetail from "./pages/EventDetail";
 import Characters from "./pages/Characters";
+import CharacterDetail from "./pages/CharacterDetail";
 import Collections from "./pages/Collections";
+import CollectionDetail from "./pages/CollectionDetail";
 import Stores from "./pages/Stores";
+import StoreDetail from "./pages/StoreDetail";
 
 const queryClient = new QueryClient();
 
@@ -39,8 +42,11 @@ const App = () => (
           <Route path="/planning" element={<ReleasePlanning />} />
           <Route path="/evenement/:id" element={<EventDetail />} />
           <Route path="/personnages" element={<Characters />} />
+          <Route path="/personnage/:id" element={<CharacterDetail />} />
           <Route path="/gammes" element={<Collections />} />
+          <Route path="/gamme/:id" element={<CollectionDetail />} />
           <Route path="/boutiques" element={<Stores />} />
+          <Route path="/boutique/:id" element={<StoreDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

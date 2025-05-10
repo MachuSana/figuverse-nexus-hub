@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { User } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -75,25 +76,31 @@ const Characters: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {characterData.map(character => (
             <Card key={character.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-              <div className="aspect-w-16 aspect-h-9 h-48">
-                <img 
-                  src={character.image} 
-                  alt={character.name} 
-                  className="w-full h-full object-cover"
-                />
-              </div>
+              <Link to={`/personnage/${character.id}`} className="block">
+                <div className="aspect-w-16 aspect-h-9 h-48">
+                  <img 
+                    src={character.image} 
+                    alt={character.name} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </Link>
               <CardContent className="p-5">
-                <h2 className="text-xl font-bold mb-1">{character.name}</h2>
+                <h2 className="text-xl font-bold mb-1">
+                  <Link to={`/personnage/${character.id}`} className="hover:text-figuverse-red transition-colors">
+                    {character.name}
+                  </Link>
+                </h2>
                 <p className="text-sm text-figuverse-red mb-2">{character.series}</p>
                 <p className="text-gray-600 text-sm mb-4 line-clamp-2">{character.description}</p>
                 <div className="flex justify-between items-center">
                   <span className="font-medium">{character.figurineCount} figurines</span>
-                  <a 
-                    href={`/personnage/${character.id}`} 
+                  <Link 
+                    to={`/personnage/${character.id}`} 
                     className="text-figuverse-red hover:underline text-sm"
                   >
                     Voir détails
-                  </a>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
