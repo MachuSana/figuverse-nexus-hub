@@ -21,6 +21,7 @@ import Collections from "./pages/Collections";
 import CollectionDetail from "./pages/CollectionDetail";
 import Stores from "./pages/Stores";
 import StoreDetail from "./pages/StoreDetail";
+import UserAuth from "./pages/UserAuth";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +48,7 @@ const App = () => (
           <Route path="/gamme/:id" element={<CollectionDetail />} />
           <Route path="/boutiques" element={<Stores />} />
           <Route path="/boutique/:id" element={<StoreDetail />} />
+          <Route path="/login" element={<UserAuth />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
