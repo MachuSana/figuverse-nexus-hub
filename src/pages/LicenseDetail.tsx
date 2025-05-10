@@ -1,15 +1,15 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Facebook, Instagram, Twitter, Youtube, Link as LinkIcon, Share, ChevronRight } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube, Link as LinkIcon, Share, ChevronRight, MessageSquare } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FigurineCard from '@/components/FigurineCard';
+import CommentSection from '@/components/CommentSection';
 
 // Mock function to fetch license details
 const fetchLicenseDetails = async (id: string) => {
@@ -279,6 +279,43 @@ const fetchLicenseDetails = async (id: string) => {
   return license;
 };
 
+// Mock comments for the license
+const licenseComments = [
+  {
+    id: '1',
+    author: 'François M.',
+    content: 'Fan de One Piece depuis le début, je suis toujours impressionné par la qualité des figurines produites pour cette licence. Les détails et la fidélité aux personnages sont incroyables.',
+    date: '2025-04-12',
+    rating: 5,
+    likes: 24,
+  },
+  {
+    id: '2',
+    author: 'Julie R.',
+    content: "J'ai commencé à collectionner les figurines One Piece récemment et je ne regrette pas mon choix. Les designs sont superbes et variés.",
+    date: '2025-03-25',
+    rating: 4,
+    likes: 15,
+  },
+  {
+    id: '3',
+    author: 'Maxime D.',
+    content: "Cette licence propose un excellent rapport qualité-prix pour les collectionneurs. Les personnages secondaires mériteraient plus de figurines !",
+    date: '2025-01-18',
+    rating: 4,
+    likes: 9,
+    replies: [
+      {
+        id: 'reply-1',
+        author: 'Léa T.',
+        content: "Totalement d'accord ! J'aimerais voir plus de personnages comme Perona ou Bartolomeo en figurines de haute qualité.",
+        date: '2025-01-19',
+        likes: 7,
+      }
+    ]
+  },
+];
+
 const LicenseDetail = () => {
   const { id } = useParams<{ id: string }>();
   const licenseId = id || '1';  // Default to ID 1 if none provided
@@ -521,41 +558,63 @@ const LicenseDetail = () => {
         
         {/* Figurines Carousel Section */}
         <div className="mt-12">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold">Figurines de la licence</h2>
-            <Button variant="outline" className="text-figuverse-red border-figuverse-red">
-              Toutes les figurines <ChevronRight size={16} className="ml-1" />
-            </Button>
-          </div>
-          
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true
-            }}
-            className="w-full relative"
-          >
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {license.figurines.map(figurine => (
-                <CarouselItem key={figurine.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                  <FigurineCard 
-                    id={figurine.id} 
-                    name={figurine.name} 
-                    character={figurine.name}  // Use name as character since it's required
-                    license={license.name}
-                    manufacturer={figurine.series || "Unknown"} // Map series to manufacturer
-                    price={figurine.price}
-                    currency="€"
-                    image={figurine.image}
-                    isNew={false}
-                    isFavorite={false}
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="left-0 md:-left-4" />
-            <CarouselNext className="right-0 md:-right-4" />
-          </Carousel>
+          <Tabs defaultValue="figurines">
+            <TabsList className="w-full flex border-b mb-0 rounded-none bg-transparent space-x-8">
+              <TabsTrigger value="figurines" className="flex items-center gap-1.5 border-b-2 rounded-none data-[state=active]:border-figuverse-red bg-transparent text-gray-700">
+                Figurines
+              </TabsTrigger>
+              <TabsTrigger value="comments" className="flex items-center gap-1.5 border-b-2 rounded-none data-[state=active]:border-figuverse-red bg-transparent text-gray-700">
+                <MessageSquare className="h-4 w-4" />
+                Avis des fans
+              </TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="figurines" className="mt-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold">Figurines de la licence</h2>
+                <Button variant="outline" className="text-figuverse-red border-figuverse-red">
+                  Toutes les figurines <ChevronRight size={16} className="ml-1" />
+                </Button>
+              </div>
+              
+              <Carousel
+                opts={{
+                  align: "start",
+                  loop: true
+                }}
+                className="w-full relative"
+              >
+                <CarouselContent className="-ml-2 md:-ml-4">
+                  {license?.figurines.map(figurine => (
+                    <CarouselItem key={figurine.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                      <FigurineCard 
+                        id={figurine.id} 
+                        name={figurine.name} 
+                        character={figurine.name}
+                        license={license.name}
+                        manufacturer={figurine.series || "Unknown"}
+                        price={figurine.price}
+                        currency="€"
+                        image={figurine.image}
+                        isNew={false}
+                        isFavorite={false}
+                      />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="left-0 md:-left-4" />
+                <CarouselNext className="right-0 md:-right-4" />
+              </Carousel>
+            </TabsContent>
+            
+            <TabsContent value="comments" className="mt-6">
+              <CommentSection 
+                comments={licenseComments}
+                contextType="license"
+                contextName={license?.name || 'cette licence'}
+              />
+            </TabsContent>
+          </Tabs>
         </div>
       </main>
       

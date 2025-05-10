@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Share, Heart, ShoppingCart, Calendar, ArrowRight, ChevronLeft, ChevronRight, Star, MessageSquare } from 'lucide-react';
@@ -6,6 +5,7 @@ import { Share, Heart, ShoppingCart, Calendar, ArrowRight, ChevronLeft, ChevronR
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FigurineCard from '@/components/FigurineCard';
+import CommentSection from '@/components/CommentSection';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -78,31 +78,40 @@ const similarFigurines = [
   },
 ];
 
-// Mock reviews data
-const reviews = [
+// Mock reviews/comments data for the CommentSection
+const comments = [
   {
     id: '1',
-    user: 'Alexandre D.',
-    avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+    author: 'Alexandre D.',
+    content: 'Superbe figurine de Gojo Satoru ! La qualité est au rendez-vous et les pièces interchangeables permettent de varier les poses. Un must pour les fans de Jujutsu Kaisen.',
     date: '2025-06-20',
     rating: 5,
-    comment: 'Superbe figurine de Gojo Satoru ! La qualité est au rendez-vous et les pièces interchangeables permettent de varier les poses. Un must pour les fans de Jujutsu Kaisen.',
+    likes: 12,
   },
   {
     id: '2',
-    user: 'Marie L.',
-    avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
+    author: 'Marie L.',
+    content: 'Très belle Nendoroid, fidèle au personnage. Les accessoires sont nombreux et bien détaillés. Seul petit bémol : certaines pièces sont difficiles à fixer.',
     date: '2025-06-18',
     rating: 4,
-    comment: 'Très belle Nendoroid, fidèle au personnage. Les accessoires sont nombreux et bien détaillés. Seul petit bémol : certaines pièces sont difficiles à fixer.',
+    likes: 7,
   },
   {
     id: '3',
-    user: 'Thomas B.',
-    avatar: 'https://randomuser.me/api/portraits/men/67.jpg',
+    author: 'Thomas B.',
+    content: "J'adore cette figurine ! Les expressions faciales sont parfaitement reproduites et le niveau de détail est impressionnant pour une Nendoroid.",
     date: '2025-06-15',
     rating: 5,
-    comment: "J'adore cette figurine ! Les expressions faciales sont parfaitement reproduites et le niveau de détail est impressionnant pour une Nendoroid.",
+    likes: 9,
+    replies: [
+      {
+        id: 'reply-1',
+        author: 'Sophie M.',
+        content: "Je suis d'accord, les expressions sont géniales. As-tu essayé la pose avec le domaine de l'expansion ?",
+        date: '2025-06-16',
+        likes: 2,
+      }
+    ]
   },
 ];
 
@@ -352,90 +361,38 @@ const FigurineDetail: React.FC = () => {
           </div>
           
           {/* Tabs */}
-          <div className="mt-12">
-            <Tabs defaultValue="reviews">
-              <TabsList className="w-full flex border-b mb-0 rounded-none bg-transparent space-x-8">
-                <TabsTrigger value="reviews" className="flex items-center gap-1.5 border-b-2 rounded-none data-[state=active]:border-figuverse-red bg-transparent text-gray-700">
-                  <MessageSquare className="h-4 w-4" />
-                  Avis ({reviews.length})
-                </TabsTrigger>
-                <TabsTrigger value="related" className="flex items-center gap-1.5 border-b-2 rounded-none data-[state=active]:border-figuverse-red bg-transparent text-gray-700">
-                  Figurines similaires
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value="reviews" className="mt-4">
-                <div id="reviews" className="mb-6">
-                  <div className="flex justify-between items-center mb-6">
-                    <div>
-                      <h2 className="text-xl font-semibold">Avis des clients</h2>
-                      <div className="flex items-center gap-2 mt-1">
-                        <div className="flex">
-                          {[1, 2, 3, 4, 5].map(star => (
-                            <Star 
-                              key={star} 
-                              className={`h-4 w-4 ${star <= Math.floor(figurineData.rating) ? 'fill-amber-400 text-amber-400' : 'text-gray-300'}`}
-                            />
-                          ))}
-                        </div>
-                        <span className="text-sm">Basé sur {figurineData.reviewCount} avis</span>
-                      </div>
+          <div className="container mx-auto px-4 py-6">
+            <div className="mt-12">
+              <Tabs defaultValue="reviews">
+                <TabsList className="w-full flex border-b mb-0 rounded-none bg-transparent space-x-8">
+                  <TabsTrigger value="reviews" className="flex items-center gap-1.5 border-b-2 rounded-none data-[state=active]:border-figuverse-red bg-transparent text-gray-700">
+                    <MessageSquare className="h-4 w-4" />
+                    Avis ({comments.length})
+                  </TabsTrigger>
+                  <TabsTrigger value="related" className="flex items-center gap-1.5 border-b-2 rounded-none data-[state=active]:border-figuverse-red bg-transparent text-gray-700">
+                    Figurines similaires
+                  </TabsTrigger>
+                </TabsList>
+                <TabsContent value="reviews" className="mt-4">
+                  <CommentSection 
+                    comments={comments}
+                    contextType="figurine"
+                    contextName={figurineData.character}
+                  />
+                </TabsContent>
+                
+                <TabsContent value="related">
+                  <div className="my-6">
+                    <h2 className="text-xl font-semibold mb-4">Figurines similaires</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                      {similarFigurines.map(figurine => (
+                        <FigurineCard key={figurine.id} {...figurine} />
+                      ))}
                     </div>
-                    <Button className="bg-figuverse-red hover:bg-opacity-90 text-white">
-                      Écrire un avis
-                    </Button>
                   </div>
-                  
-                  {/* Reviews list */}
-                  <div className="space-y-6">
-                    {reviews.map(review => (
-                      <div key={review.id} className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                        <div className="flex items-center gap-3 mb-3">
-                          <img 
-                            src={review.avatar} 
-                            alt={review.user} 
-                            className="w-10 h-10 rounded-full object-cover"
-                          />
-                          <div>
-                            <p className="font-medium">{review.user}</p>
-                            <div className="flex items-center gap-2">
-                              <div className="flex">
-                                {[1, 2, 3, 4, 5].map(star => (
-                                  <Star 
-                                    key={star} 
-                                    className={`h-3 w-3 ${star <= review.rating ? 'fill-amber-400 text-amber-400' : 'text-gray-300'}`}
-                                  />
-                                ))}
-                              </div>
-                              <span className="text-xs text-gray-500">
-                                {new Date(review.date).toLocaleDateString('fr-FR')}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <p className="text-gray-600">{review.comment}</p>
-                      </div>
-                    ))}
-                  </div>
-                  
-                  <div className="text-center mt-6">
-                    <button className="text-figuverse-red font-medium hover:underline">
-                      Voir tous les avis
-                    </button>
-                  </div>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="related">
-                <div className="my-6">
-                  <h2 className="text-xl font-semibold mb-4">Figurines similaires</h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                    {similarFigurines.map(figurine => (
-                      <FigurineCard key={figurine.id} {...figurine} />
-                    ))}
-                  </div>
-                </div>
-              </TabsContent>
-            </Tabs>
+                </TabsContent>
+              </Tabs>
+            </div>
           </div>
         </div>
       </main>
