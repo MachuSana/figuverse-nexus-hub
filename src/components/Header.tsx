@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search, Menu, X, Heart, User, Home, Box, Award, Newspaper, Calendar, LogIn } from 'lucide-react';
+import { Search, Menu, X, Heart, User, Home, Box, Award, Newspaper, Calendar, LogIn, Package, ShoppingBag, Users } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const Header: React.FC = () => {
@@ -18,6 +18,9 @@ const Header: React.FC = () => {
     { name: "Accueil", path: "/", icon: Home },
     { name: "Figurines", path: "/figurines", icon: Box },
     { name: "Licences", path: "/licences", icon: Award },
+    { name: "Personnages", path: "/personnages", icon: Users },
+    { name: "Gammes", path: "/gammes", icon: Package },
+    { name: "Boutiques", path: "/boutiques", icon: ShoppingBag },
     { name: "Actualités", path: "/news", icon: Newspaper },
     { name: "Planning", path: "/planning", icon: Calendar },
   ];

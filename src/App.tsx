@@ -15,6 +15,9 @@ import ManufacturerDetail from "./pages/ManufacturerDetail";
 import News from "./pages/News";
 import ReleasePlanning from "./pages/ReleasePlanning";
 import EventDetail from "./pages/EventDetail";
+import Characters from "./pages/Characters";
+import Collections from "./pages/Collections";
+import Stores from "./pages/Stores";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +38,9 @@ const App = () => (
           <Route path="/news" element={<News />} />
           <Route path="/planning" element={<ReleasePlanning />} />
           <Route path="/evenement/:id" element={<EventDetail />} />
+          <Route path="/personnages" element={<Characters />} />
+          <Route path="/gammes" element={<Collections />} />
+          <Route path="/boutiques" element={<Stores />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
