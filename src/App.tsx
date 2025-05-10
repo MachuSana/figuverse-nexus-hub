@@ -22,6 +22,7 @@ import CollectionDetail from "./pages/CollectionDetail";
 import Stores from "./pages/Stores";
 import StoreDetail from "./pages/StoreDetail";
 import UserAuth from "./pages/UserAuth";
+import UserDashboard from "./pages/UserDashboard";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +50,7 @@ const App = () => (
           <Route path="/boutiques" element={<Stores />} />
           <Route path="/boutique/:id" element={<StoreDetail />} />
           <Route path="/login" element={<UserAuth />} />
+          <Route path="/dashboard" element={<UserDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
