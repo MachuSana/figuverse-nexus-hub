@@ -37,5 +37,13 @@
   "newsletter_terms_notice": "Al suscribirte a nuestro boletín, aceptas recibir correos electrónicos de nuestra parte. Puedes darte de baja en cualquier momento. Para más información, consulta nuestra",
   "newsletter_page_description": "Recibe las últimas noticias del mundo de las figuras, novedades, promociones y eventos que no te puedes perder.",
   "skip_to_content": "Ir al contenido",
-  "skip_to_footer": "Ir al pie de página"
+  "skip_to_footer": "Ir al pie de página",
+  "accessibility_statement": "Declaración de accesibilidad",
+  "increase_text_size": "Aumentar tamaño del texto",
+  "decrease_text_size": "Disminuir tamaño del texto",
+  "reset_text_size": "Restablecer tamaño del texto",
+  "high_contrast": "Alto contraste",
+  "default_contrast": "Contraste predeterminado",
+  "light_mode": "Modo claro",
+  "dark_mode": "Modo oscuro"
 }

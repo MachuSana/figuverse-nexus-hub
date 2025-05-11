@@ -107,6 +107,23 @@
   .sr-only {
     @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
   }
+
+  /* Skip link becoming visible on focus */
+  .sr-only:focus, .sr-only:focus-within {
+    @apply w-auto h-auto overflow-visible static;
+  }
+  
+  /* Improve focus visibility */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-figuverse-red; 
+  }
+  
+  /* Smooth scrolling for all users but respect reduced motion preferences */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
 }
 
 @layer components {
@@ -142,5 +159,26 @@
   
   .accessible-label {
     @apply block text-gray-800 font-medium mb-1;
+  }
+  
+  /* Animations with reduced motion support */
+  @media (prefers-reduced-motion: no-preference) {
+    .transition-element {
+      @apply transition-all duration-300;
+    }
+    
+    .hover-scale {
+      @apply hover:scale-105;
+    }
+  }
+  
+  /* Card hover styles with animation */
+  .card-hover {
+    @apply transition-shadow duration-300 hover:shadow-lg;
+  }
+  
+  /* Consistent button styles */
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-colors;
   }
 }

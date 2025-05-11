@@ -37,5 +37,13 @@
   "newsletter_terms_notice": "By subscribing to our newsletter, you agree to receive emails from us. You can unsubscribe at any time. For more information, see our",
   "newsletter_page_description": "Receive the latest news from the world of figurines, new releases, promotions and events not to be missed.",
   "skip_to_content": "Skip to content",
-  "skip_to_footer": "Skip to footer"
+  "skip_to_footer": "Skip to footer",
+  "accessibility_statement": "Accessibility Statement",
+  "increase_text_size": "Increase text size",
+  "decrease_text_size": "Decrease text size",
+  "reset_text_size": "Reset text size",
+  "high_contrast": "High contrast",
+  "default_contrast": "Default contrast",
+  "light_mode": "Light mode",
+  "dark_mode": "Dark mode"
 }
