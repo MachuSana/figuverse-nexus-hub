@@ -63,16 +63,28 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Custom theme colors
+				// Custom theme colors with enhanced contrast for accessibility
 				figuverse: {
 					red: '#ea384c',
+					'red-dark': '#d11a2d', // Darker red for better contrast
 					gray: {
+						50: '#F8F8F8',
 						100: '#F1F1F1',
 						200: '#E0E0E0',
 						300: '#C8C8C9',
 						400: '#9F9EA1',
 						500: '#8E9196',
+						600: '#6D6E71', // Better contrast for text
+						700: '#4D4D4F', // High contrast for important text
+						800: '#333333',
+						900: '#1A1A1A',
 					}
+				},
+				// Colors for accessibility
+				a11y: {
+					focus: '#2563EB', // Focus outline color
+					error: '#DC2626',  // Error message color
+					success: '#16A34A', // Success message color
 				}
 			},
 			borderRadius: {

@@ -1,16 +1,19 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Globe, Mail } from 'lucide-react';
+import { Mail } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Footer: React.FC = () => {
+  const { t } = useLanguage();
+  
   return (
     <footer className="bg-gray-100 pt-12 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Column 1 */}
           <div>
-            <h3 className="text-lg font-bold mb-4">FiguVerse</h3>
+            <h3 className="text-lg font-bold mb-4">{t("site_name")}</h3>
             <p className="text-sm text-gray-600 mb-4">
               La référence des figurines de manga, anime et jeux vidéo.
             </p>
@@ -44,43 +47,43 @@ const Footer: React.FC = () => {
 
           {/* Column 2 */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Catégories</h3>
+            <h3 className="text-lg font-bold mb-4">{t("categories")}</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/figurines" className="text-gray-600 hover:text-figuverse-red">Figurines</Link>
+                <Link to="/figurines" className="text-gray-600 hover:text-figuverse-red">{t("figurines")}</Link>
               </li>
               <li>
-                <Link to="/licences" className="text-gray-600 hover:text-figuverse-red">Licences</Link>
+                <Link to="/licences" className="text-gray-600 hover:text-figuverse-red">{t("licenses")}</Link>
               </li>
               <li>
-                <Link to="/fabricants" className="text-gray-600 hover:text-figuverse-red">Fabricants</Link>
+                <Link to="/fabricants" className="text-gray-600 hover:text-figuverse-red">{t("manufacturers")}</Link>
               </li>
               <li>
-                <Link to="/news" className="text-gray-600 hover:text-figuverse-red">Actualités</Link>
+                <Link to="/news" className="text-gray-600 hover:text-figuverse-red">{t("news")}</Link>
               </li>
               <li>
-                <Link to="/planning" className="text-gray-600 hover:text-figuverse-red">Planning</Link>
+                <Link to="/planning" className="text-gray-600 hover:text-figuverse-red">{t("planning")}</Link>
               </li>
             </ul>
           </div>
 
           {/* Column 3 - Liens Utiles */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Liens Utiles</h3>
+            <h3 className="text-lg font-bold mb-4">{t("useful_links")}</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/about" className="text-gray-600 hover:text-figuverse-red">À propos</Link>
+                <Link to="/about" className="text-gray-600 hover:text-figuverse-red">{t("about")}</Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-600 hover:text-figuverse-red">Contact</Link>
+                <Link to="/contact" className="text-gray-600 hover:text-figuverse-red">{t("contact")}</Link>
               </li>
               <li>
-                <Link to="/faq" className="text-gray-600 hover:text-figuverse-red">FAQ</Link>
+                <Link to="/faq" className="text-gray-600 hover:text-figuverse-red">{t("faq")}</Link>
               </li>
               <li>
                 <Link to="/newsletter" className="text-gray-600 hover:text-figuverse-red flex items-center gap-1.5">
                   <Mail className="h-3 w-3" />
-                  Newsletter
+                  {t("newsletter")}
                 </Link>
               </li>
             </ul>
@@ -88,66 +91,50 @@ const Footer: React.FC = () => {
 
           {/* Column 4 - Mentions Légales */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Mentions Légales</h3>
+            <h3 className="text-lg font-bold mb-4">{t("legal")}</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/cgu" className="text-gray-600 hover:text-figuverse-red">Conditions d'utilisation</Link>
+                <Link to="/cgu" className="text-gray-600 hover:text-figuverse-red">{t("terms")}</Link>
               </li>
               <li>
-                <Link to="/privacy" className="text-gray-600 hover:text-figuverse-red">Politique de confidentialité</Link>
+                <Link to="/privacy" className="text-gray-600 hover:text-figuverse-red">{t("privacy")}</Link>
               </li>
               <li>
-                <Link to="/cookies" className="text-gray-600 hover:text-figuverse-red">Politique de cookies</Link>
+                <Link to="/cookies" className="text-gray-600 hover:text-figuverse-red">{t("cookies")}</Link>
               </li>
               <li>
-                <Link to="/mentions-legales" className="text-gray-600 hover:text-figuverse-red">Mentions légales</Link>
+                <Link to="/mentions-legales" className="text-gray-600 hover:text-figuverse-red">{t("legal")}</Link>
               </li>
             </ul>
           </div>
 
           {/* Column 5 - Newsletter & Language */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Newsletter</h3>
+            <h3 className="text-lg font-bold mb-4">{t("newsletter")}</h3>
             <p className="text-sm text-gray-600 mb-4">
-              Inscrivez-vous pour recevoir les dernières actualités et offres.
+              {t("newsletter_signup_text")}
             </p>
             <form className="space-y-2">
               <div className="flex">
                 <input
                   type="email"
-                  placeholder="Votre email"
-                  className="px-3 py-2 border border-r-0 rounded-l-md flex-grow text-sm focus:outline-none"
+                  placeholder={t("your_email")}
+                  className="w-full p-2 border border-r-0 rounded-l-md flex-grow text-sm focus:outline-none"
                 />
                 <Link
                   to="/newsletter"
                   className="bg-figuverse-red text-white px-4 py-2 rounded-r-md hover:bg-opacity-90 transition-colors text-sm inline-flex items-center"
                 >
-                  S'inscrire
+                  {t("subscribe")}
                 </Link>
               </div>
             </form>
-            
-            {/* Language Selector */}
-            <div className="mt-6">
-              <h3 className="text-lg font-bold mb-2">Langue</h3>
-              <div className="flex items-center space-x-4 text-sm">
-                <button className="flex items-center text-figuverse-red font-medium">
-                  <Globe className="h-4 w-4 mr-1" /> FR
-                </button>
-                <button className="flex items-center text-gray-600 hover:text-figuverse-red">
-                  <Globe className="h-4 w-4 mr-1" /> EN
-                </button>
-                <button className="flex items-center text-gray-600 hover:text-figuverse-red">
-                  <Globe className="h-4 w-4 mr-1" /> ES
-                </button>
-              </div>
-            </div>
           </div>
         </div>
 
         <div className="border-t border-gray-200 mt-10 pt-8">
           <p className="text-sm text-center text-gray-500">
-            &copy; {new Date().getFullYear()} FiguVerse. Tous droits réservés.
+            &copy; {new Date().getFullYear()} {t("site_name")}. {t("all_rights_reserved")}
           </p>
         </div>
       </div>

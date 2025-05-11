@@ -98,15 +98,24 @@
   .section-container {
     @apply container px-4 md:px-6 py-8 mx-auto;
   }
+  
+  /* Accessibility improvements */
+  a:focus, button:focus, input:focus, select:focus, textarea:focus {
+    @apply outline-2 outline-offset-2 outline-figuverse-red;
+  }
+  
+  .sr-only {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+  }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-figuverse-red text-white px-4 py-2 rounded-md hover:bg-opacity-90 transition-colors;
+    @apply bg-figuverse-red text-white font-medium px-4 py-2 rounded-md hover:bg-opacity-90 transition-colors;
   }
   
   .btn-secondary {
-    @apply bg-figuverse-gray-100 text-foreground px-4 py-2 rounded-md hover:bg-figuverse-gray-200 transition-colors;
+    @apply bg-figuverse-gray-100 text-gray-800 font-medium px-4 py-2 rounded-md hover:bg-figuverse-gray-200 transition-colors;
   }
 
   .card {
@@ -115,5 +124,23 @@
 
   .page-header {
     @apply text-3xl md:text-4xl font-bold text-center my-8;
+  }
+  
+  /* High contrast text for better accessibility */
+  .text-high-contrast {
+    @apply text-gray-900;
+  }
+  
+  .text-medium-contrast {
+    @apply text-gray-800;
+  }
+  
+  /* Form elements with better accessibility */
+  .accessible-input {
+    @apply border border-gray-300 rounded-md px-4 py-2 w-full focus:border-figuverse-red focus:ring-1 focus:ring-figuverse-red;
+  }
+  
+  .accessible-label {
+    @apply block text-gray-800 font-medium mb-1;
   }
 }
