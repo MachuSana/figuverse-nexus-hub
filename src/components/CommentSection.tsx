@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MessageCircle, Calendar, Flag, Star, Sort, Shield, ThumbsUp } from "lucide-react";
+import { MessageCircle, Calendar, Flag, Star, ArrowUpDown, Shield, ThumbsUp } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useToast } from "@/components/ui/use-toast";
@@ -308,7 +307,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
               onValueChange={(value) => handleSortChange(value as 'recent' | 'popular')}
             >
               <SelectTrigger className="w-[180px] h-9 text-sm border-gray-200">
-                <Sort className="h-4 w-4 mr-2" />
+                <ArrowUpDown className="h-4 w-4 mr-2" />
                 <SelectValue placeholder="Trier par" />
               </SelectTrigger>
               <SelectContent>
