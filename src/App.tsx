@@ -23,6 +23,8 @@ import Stores from "./pages/Stores";
 import StoreDetail from "./pages/StoreDetail";
 import UserAuth from "./pages/UserAuth";
 import UserDashboard from "./pages/UserDashboard";
+import Newsletter from "./pages/Newsletter";
+import NewsletterPrompt from "./components/NewsletterPrompt";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +34,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <NewsletterPrompt />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/figurines" element={<Figurines />} />
@@ -51,6 +54,7 @@ const App = () => (
           <Route path="/boutique/:id" element={<StoreDetail />} />
           <Route path="/login" element={<UserAuth />} />
           <Route path="/dashboard" element={<UserDashboard />} />
+          <Route path="/newsletter" element={<Newsletter />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

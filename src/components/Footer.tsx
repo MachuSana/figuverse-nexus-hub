@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Globe } from 'lucide-react';
+import { Globe, Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -77,6 +77,12 @@ const Footer: React.FC = () => {
               <li>
                 <Link to="/faq" className="text-gray-600 hover:text-figuverse-red">FAQ</Link>
               </li>
+              <li>
+                <Link to="/newsletter" className="text-gray-600 hover:text-figuverse-red flex items-center gap-1.5">
+                  <Mail className="h-3 w-3" />
+                  Newsletter
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -112,12 +118,12 @@ const Footer: React.FC = () => {
                   placeholder="Votre email"
                   className="px-3 py-2 border border-r-0 rounded-l-md flex-grow text-sm focus:outline-none"
                 />
-                <button
-                  type="submit"
-                  className="bg-figuverse-red text-white px-4 py-2 rounded-r-md hover:bg-opacity-90 transition-colors text-sm"
+                <Link
+                  to="/newsletter"
+                  className="bg-figuverse-red text-white px-4 py-2 rounded-r-md hover:bg-opacity-90 transition-colors text-sm inline-flex items-center"
                 >
                   S'inscrire
-                </button>
+                </Link>
               </div>
             </form>
             

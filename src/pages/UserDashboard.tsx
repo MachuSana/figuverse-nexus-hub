@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -12,6 +11,7 @@ import { Separator } from "@/components/ui/separator";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useIsMobile } from "@/hooks/use-mobile";
 import FigurineCard from "@/components/FigurineCard";
+import NewsletterSubscription from "@/components/NewsletterSubscription";
 
 const UserDashboard: React.FC = () => {
   const isMobile = useIsMobile();
@@ -297,48 +297,11 @@ const UserDashboard: React.FC = () => {
                     Abonnez-vous à notre newsletter pour recevoir les dernières actualités
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <Label htmlFor="newsletter-subscription" className="font-medium">Newsletter mensuelle</Label>
-                      <p className="text-sm text-muted-foreground">Recevez notre newsletter avec les dernières actualités et sorties</p>
-                    </div>
-                    <Switch id="newsletter-subscription" defaultChecked />
-                  </div>
-                  
-                  <Separator />
-                  
-                  <div className="space-y-4">
-                    <h3 className="font-semibold">Options d'abonnement</h3>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <Label htmlFor="newsletter-new-releases" className="font-medium">Nouvelles sorties</Label>
-                        <p className="text-sm text-muted-foreground">Informations sur les nouvelles figurines</p>
-                      </div>
-                      <Switch id="newsletter-new-releases" defaultChecked />
-                    </div>
-                    
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <Label htmlFor="newsletter-events" className="font-medium">Événements</Label>
-                        <p className="text-sm text-muted-foreground">Informations sur les événements et conventions</p>
-                      </div>
-                      <Switch id="newsletter-events" defaultChecked />
-                    </div>
-                    
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <Label htmlFor="newsletter-promotions" className="font-medium">Promotions</Label>
-                        <p className="text-sm text-muted-foreground">Offres spéciales et promotions</p>
-                      </div>
-                      <Switch id="newsletter-promotions" />
-                    </div>
-                  </div>
-                  
-                  <div className="pt-4 flex flex-col gap-4">
-                    <Button>Mettre à jour les préférences</Button>
-                    <Button variant="outline">Se désabonner de toutes les communications</Button>
-                  </div>
+                <CardContent>
+                  <NewsletterSubscription 
+                    userEmail="collectionfan92@example.com"
+                    defaultSubscribed={true}
+                  />
                 </CardContent>
               </Card>
             </TabsContent>
