@@ -1,4 +1,3 @@
-
 {
   "site_name": "FiguVerse",
   "home": "Home",
@@ -125,5 +124,26 @@
   "bootleg_term": "Bootleg",
   "bootleg_def": "Counterfeit figurine, usually of inferior quality.",
   "grail_term": "Grail",
-  "grail_def": "Highly sought-after and hard-to-find figurine, often expensive."
+  "grail_def": "Highly sought-after and hard-to-find figurine, often expensive.",
+  "support": "Support",
+  "support_page_title": "Support FiguVerse",
+  "support_page_subtitle": "Help us grow the community",
+  "support_intro": "Hello everyone! If you appreciate the content we create on FiguVerse, your support helps us tremendously to continue improving the site, creating more quality content, and developing new features for the community.",
+  "why_support_title": "Why support us?",
+  "why_support_text": "FiguVerse is a passionate and independent project. Your donations help us cover server costs, improve the site, and dedicate more time to creating exclusive content for you.",
+  "support_platforms_title": "Support platforms",
+  "kofi_desc": "Buy us a coffee on Ko-fi! One-time or recurring donations.",
+  "utip_desc": "Support us on Utip with donations and access exclusive content.",
+  "patreon_desc": "Join our Patreon for exclusive benefits and premium content.",
+  "support_benefits_title": "Benefits for our supporters",
+  "early_access": "Early access to new articles",
+  "exclusive_content": "Exclusive content and interviews",
+  "discord_access": "VIP Discord access",
+  "monthly_thanks": "Monthly thanks",
+  "other_ways_title": "Other ways to help us",
+  "share_content": "Share our articles on social media",
+  "leave_comments": "Leave comments and participate in discussions",
+  "suggest_content": "Suggest content ideas or new figurines to test",
+  "thank_you_title": "Thank you!",
+  "thank_you_text": "Whether you can support us financially or not, your presence in our community is already precious support. Thank you for being part of the FiguVerse adventure!"
 }

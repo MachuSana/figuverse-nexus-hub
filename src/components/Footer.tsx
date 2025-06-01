@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail } from 'lucide-react';
+import { Mail, Heart } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const Footer: React.FC = () => {
@@ -84,6 +84,12 @@ const Footer: React.FC = () => {
                 <Link to="/newsletter" className="text-gray-600 hover:text-figuverse-red flex items-center gap-1.5">
                   <Mail className="h-3 w-3" />
                   {t("newsletter")}
+                </Link>
+              </li>
+              <li>
+                <Link to="/support" className="text-gray-600 hover:text-figuverse-red flex items-center gap-1.5">
+                  <Heart className="h-3 w-3" />
+                  {t("support")}
                 </Link>
               </li>
             </ul>

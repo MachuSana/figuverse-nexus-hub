@@ -1,4 +1,3 @@
-
 {
   "site_name": "FiguVerse",
   "home": "Inicio",
@@ -125,5 +124,26 @@
   "bootleg_term": "Bootleg",
   "bootleg_def": "Falsificación de figura, generalmente de calidad inferior.",
   "grail_term": "Grail",
-  "grail_def": "Figura muy buscada y difícil de encontrar, a menudo cara."
+  "grail_def": "Figura muy buscada y difícil de encontrar, a menudo cara.",
+  "support": "Apoyar",
+  "support_page_title": "Apoya a FiguVerse",
+  "support_page_subtitle": "Ayúdanos a hacer crecer la comunidad",
+  "support_intro": "¡Hola a todos! Si aprecias el contenido que creamos en FiguVerse, tu apoyo nos ayuda enormemente a continuar mejorando el sitio, crear más contenido de calidad y desarrollar nuevas funcionalidades para la comunidad.",
+  "why_support_title": "¿Por qué apoyarnos?",
+  "why_support_text": "FiguVerse es un proyecto apasionado e independiente. Tus donaciones nos ayudan a cubrir los costos del servidor, mejorar el sitio y dedicar más tiempo a crear contenido exclusivo para ti.",
+  "support_platforms_title": "Plataformas de apoyo",
+  "kofi_desc": "¡Cómpranos un café en Ko-fi! Donaciones puntuales o recurrentes.",
+  "utip_desc": "Apóyanos en Utip con donaciones y accede a contenido exclusivo.",
+  "patreon_desc": "Únete a nuestro Patreon para beneficios exclusivos y contenido premium.",
+  "support_benefits_title": "Beneficios para nuestros seguidores",
+  "early_access": "Acceso anticipado a nuevos artículos",
+  "exclusive_content": "Contenido exclusivo y entrevistas",
+  "discord_access": "Acceso VIP a Discord",
+  "monthly_thanks": "Agradecimientos mensuales",
+  "other_ways_title": "Otras formas de ayudarnos",
+  "share_content": "Comparte nuestros artículos en redes sociales",
+  "leave_comments": "Deja comentarios y participa en las discusiones",
+  "suggest_content": "Sugiere ideas de contenido o nuevas figuras para probar",
+  "thank_you_title": "¡Gracias!",
+  "thank_you_text": "Ya sea que puedas apoyarnos financieramente o no, tu presencia en nuestra comunidad ya es un apoyo valioso. ¡Gracias por ser parte de la aventura FiguVerse!"
 }
