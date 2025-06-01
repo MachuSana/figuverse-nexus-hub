@@ -26,6 +26,7 @@ import UserAuth from "./pages/UserAuth";
 import UserDashboard from "./pages/UserDashboard";
 import Newsletter from "./pages/Newsletter";
 import About from "./pages/About";
+import CollectionGuide from "./pages/CollectionGuide";
 import NewsletterPrompt from "./components/NewsletterPrompt";
 import AccessibilitySkipLinks from "./components/AccessibilitySkipLinks";
 
@@ -62,6 +63,7 @@ const App = () => (
               <Route path="/dashboard" element={<UserDashboard />} />
               <Route path="/newsletter" element={<Newsletter />} />
               <Route path="/about" element={<About />} />
+              <Route path="/guide" element={<CollectionGuide />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
