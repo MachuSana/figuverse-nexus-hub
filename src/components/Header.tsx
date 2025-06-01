@@ -5,21 +5,24 @@ import { Search, Menu, X, Heart, LogIn, Home, Box, Award, Newspaper, Calendar, P
 import { Button } from "@/components/ui/button";
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSelector from './LanguageSelector';
+import MegaMenu from './MegaMenu';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const location = useLocation();
   const { t } = useLanguage();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleSearch = () => setIsSearchOpen(!isSearchOpen);
+  const toggleMegaMenu = () => setIsMegaMenuOpen(!isMegaMenuOpen);
 
   const isActive = (path: string) => location.pathname === path;
 
   const menuItems = [
     { name: t("home"), path: "/", icon: Home },
-    { name: t("figurines"), path: "/figurines", icon: Box },
+    { name: t("figurines"), path: "/figurines", icon: Box, hasMegaMenu: true },
     { name: t("licenses"), path: "/licences", icon: Award },
     { name: t("characters"), path: "/personnages", icon: Users },
     { name: t("collections"), path: "/gammes", icon: Package },
@@ -40,14 +43,25 @@ const Header: React.FC = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             {menuItems.map((item) => (
-              <Link 
-                key={item.path}
-                to={item.path} 
-                className={`flex items-center space-x-2 ${isActive(item.path) ? 'text-figuverse-red font-medium' : 'text-gray-700 hover:text-figuverse-red'} transition-colors`}
-              >
-                <item.icon className="h-4 w-4" />
-                <span>{item.name}</span>
-              </Link>
+              <div key={item.path} className="relative">
+                {item.hasMegaMenu ? (
+                  <button 
+                    onClick={toggleMegaMenu}
+                    className={`flex items-center space-x-2 ${isActive(item.path) ? 'text-figuverse-red font-medium' : 'text-gray-700 hover:text-figuverse-red'} transition-colors`}
+                  >
+                    <item.icon className="h-4 w-4" />
+                    <span>{item.name}</span>
+                  </button>
+                ) : (
+                  <Link 
+                    to={item.path} 
+                    className={`flex items-center space-x-2 ${isActive(item.path) ? 'text-figuverse-red font-medium' : 'text-gray-700 hover:text-figuverse-red'} transition-colors`}
+                  >
+                    <item.icon className="h-4 w-4" />
+                    <span>{item.name}</span>
+                  </Link>
+                )}
+              </div>
             ))}
           </nav>
 
@@ -95,6 +109,9 @@ const Header: React.FC = () => {
         )}
       </div>
 
+      {/* Mega Menu */}
+      <MegaMenu isOpen={isMegaMenuOpen} onClose={() => setIsMegaMenuOpen(false)} />
+
       {/* Mobile Menu */}
       {isMenuOpen && (
         <nav className="md:hidden bg-white border-t animate-fade-in">
@@ -104,16 +121,17 @@ const Header: React.FC = () => {
                 key={item.path}
                 to={item.path} 
                 className={`flex items-center space-x-3 ${isActive(item.path) ? 'text-figuverse-red font-medium' : 'text-gray-700 hover:text-figuverse-red'} transition-colors`}
+                onClick={() => setIsMenuOpen(false)}
               >
                 <item.icon className="h-5 w-5" />
                 <span>{item.name}</span>
               </Link>
             ))}
             <div className="pt-2 border-t flex space-x-4">
-              <Link to="/favorites" className="text-gray-700 hover:text-figuverse-red transition-colors flex items-center">
+              <Link to="/favorites" className="text-gray-700 hover:text-figuverse-red transition-colors flex items-center" onClick={() => setIsMenuOpen(false)}>
                 <Heart className="h-5 w-5 mr-2" /> {t("favorites")}
               </Link>
-              <Link to="/login" className="text-gray-700 hover:text-figuverse-red transition-colors flex items-center">
+              <Link to="/login" className="text-gray-700 hover:text-figuverse-red transition-colors flex items-center" onClick={() => setIsMenuOpen(false)}>
                 <LogIn className="h-5 w-5 mr-2" /> {t("login")}
               </Link>
             </div>
