@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Search, Filter, Grid, List } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -22,21 +21,24 @@ const Licenses: React.FC = () => {
     {
       id: '1',
       name: 'Marvel',
-      description: 'Univers Marvel avec tous vos super-héros préférés',
+      studio: 'Marvel Studios',
+      type: 'Comics/Films',
       image: 'https://via.placeholder.com/150',
       figurineCount: 152
     },
     {
       id: '2',
       name: 'Dragon Ball',
-      description: 'L\'univers légendaire de Goku et ses amis',
+      studio: 'Toei Animation',
+      type: 'Anime/Manga',
       image: 'https://via.placeholder.com/150',
       figurineCount: 89
     },
     {
       id: '3',
       name: 'One Piece',
-      description: 'Suivez Luffy dans sa quête du One Piece',
+      studio: 'Toei Animation',
+      type: 'Anime/Manga',
       image: 'https://via.placeholder.com/150',
       figurineCount: 76
     }
@@ -144,9 +146,11 @@ const Licenses: React.FC = () => {
                   key={license.id}
                   id={license.id}
                   name={license.name}
-                  description={license.description}
+                  studio={license.studio}
+                  type={license.type}
                   image={license.image}
                   figurineCount={license.figurineCount}
+                  viewStyle={viewMode}
                 />
               ))}
             </div>

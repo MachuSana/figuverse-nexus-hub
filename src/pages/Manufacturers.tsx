@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Search, Filter, Grid, List } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -23,25 +22,25 @@ const Manufacturers: React.FC = () => {
       id: '1',
       name: 'Good Smile Company',
       description: 'Fabricant japonais de figurines de haute qualité',
-      image: 'https://via.placeholder.com/150',
-      country: 'Japon',
-      figurineCount: 284
+      logo: 'https://via.placeholder.com/150',
+      figurineCount: 284,
+      rating: 4.8
     },
     {
       id: '2',
       name: 'Kotobukiya',
       description: 'Spécialiste des figurines anime et manga',
-      image: 'https://via.placeholder.com/150',
-      country: 'Japon',
-      figurineCount: 192
+      logo: 'https://via.placeholder.com/150',
+      figurineCount: 192,
+      rating: 4.7
     },
     {
       id: '3',
       name: 'Hot Toys',
       description: 'Figurines ultra-réalistes de films et séries',
-      image: 'https://via.placeholder.com/150',
-      country: 'Hong Kong',
-      figurineCount: 156
+      logo: 'https://via.placeholder.com/150',
+      figurineCount: 156,
+      rating: 4.9
     }
   ]);
 
@@ -148,10 +147,11 @@ const Manufacturers: React.FC = () => {
                   key={manufacturer.id}
                   id={manufacturer.id}
                   name={manufacturer.name}
+                  logo={manufacturer.logo}
                   description={manufacturer.description}
-                  image={manufacturer.image}
-                  country={manufacturer.country}
                   figurineCount={manufacturer.figurineCount}
+                  rating={manufacturer.rating}
+                  viewStyle={viewMode}
                 />
               ))}
             </div>
