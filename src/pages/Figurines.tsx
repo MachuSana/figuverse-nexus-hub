@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Search, Filter, Grid, List } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -20,52 +21,71 @@ const Figurines: React.FC = () => {
   const [figurines, setFigurines] = useState([
     {
       id: '1',
-      name: 'Figurine 1',
-      imageUrl: 'https://via.placeholder.com/150',
-      price: '49.99',
+      name: 'Premium Figure',
+      character: 'Figurine 1',
       license: 'License A',
       manufacturer: 'Manufacturer X',
+      price: 49.99,
+      currency: '€',
+      image: 'https://via.placeholder.com/150',
+      releaseDate: '2025-06-15',
+      isNew: true
     },
     {
       id: '2',
-      name: 'Figurine 2',
-      imageUrl: 'https://via.placeholder.com/150',
-      price: '59.99',
+      name: 'Special Edition',
+      character: 'Figurine 2',
       license: 'License B',
       manufacturer: 'Manufacturer Y',
+      price: 59.99,
+      currency: '€',
+      image: 'https://via.placeholder.com/150',
+      releaseDate: '2025-07-01'
     },
     {
       id: '3',
-      name: 'Figurine 3',
-      imageUrl: 'https://via.placeholder.com/150',
-      price: '69.99',
+      name: 'Limited Edition',
+      character: 'Figurine 3',
       license: 'License A',
       manufacturer: 'Manufacturer Z',
+      price: 69.99,
+      currency: '€',
+      image: 'https://via.placeholder.com/150',
+      releaseDate: '2025-08-15'
     },
     {
       id: '4',
-      name: 'Figurine 4',
-      imageUrl: 'https://via.placeholder.com/150',
-      price: '79.99',
+      name: 'Collector\'s Edition',
+      character: 'Figurine 4',
       license: 'License C',
       manufacturer: 'Manufacturer X',
+      price: 79.99,
+      currency: '€',
+      image: 'https://via.placeholder.com/150',
+      releaseDate: '2025-09-01'
     },
     {
       id: '5',
-      name: 'Figurine 5',
-      imageUrl: 'https://via.placeholder.com/150',
-      price: '89.99',
+      name: 'Deluxe Figure',
+      character: 'Figurine 5',
       license: 'License B',
       manufacturer: 'Manufacturer Y',
+      price: 89.99,
+      currency: '€',
+      image: 'https://via.placeholder.com/150',
+      releaseDate: '2025-10-15'
     },
     {
       id: '6',
-      name: 'Figurine 6',
-      imageUrl: 'https://via.placeholder.com/150',
-      price: '99.99',
+      name: 'Master Grade',
+      character: 'Figurine 6',
       license: 'License C',
       manufacturer: 'Manufacturer Z',
-    },
+      price: 99.99,
+      currency: '€',
+      image: 'https://via.placeholder.com/150',
+      releaseDate: '2025-11-01'
+    }
   ]);
 
   // Publicités contextuelles pour la page figurines
@@ -161,11 +181,11 @@ const Figurines: React.FC = () => {
             {/* Publicité en haut de page */}
             <div className="mb-8">
               <AdBanner
-                title={figurinesAds[0].title}
-                description={figurinesAds[0].description}
-                imageUrl={figurinesAds[0].imageUrl}
-                linkUrl={figurinesAds[0].linkUrl}
-                sponsor={figurinesAds[0].sponsor}
+                title="HobbyLink Japan - Figurines exclusives"
+                description="Découvrez les dernières figurines japonaises en précommande avec des prix exclusifs"
+                imageUrl="https://images.unsplash.com/photo-1578662996442-48f60103fc96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800"
+                linkUrl="https://www.hlj.com"
+                sponsor="HobbyLink Japan"
                 size="large"
               />
             </div>
@@ -191,8 +211,16 @@ const Figurines: React.FC = () => {
               {figurines.map((figurine) => (
                 <FigurineCard
                   key={figurine.id}
-                  figurine={figurine}
-                  viewMode={viewMode}
+                  id={figurine.id}
+                  name={figurine.name}
+                  character={figurine.character}
+                  license={figurine.license}
+                  manufacturer={figurine.manufacturer}
+                  price={figurine.price}
+                  currency={figurine.currency}
+                  image={figurine.image}
+                  releaseDate={figurine.releaseDate}
+                  isNew={figurine.isNew}
                 />
               ))}
             </div>
@@ -200,11 +228,11 @@ const Figurines: React.FC = () => {
             {/* Publicité au milieu du contenu */}
             <div className="my-12">
               <AdBanner
-                title={figurinesAds[1].title}
-                description={figurinesAds[1].description}
-                imageUrl={figurinesAds[1].imageUrl}
-                linkUrl={figurinesAds[1].linkUrl}
-                sponsor={figurinesAds[1].sponsor}
+                title="AmiAmi - Spécialiste figurines"
+                description="Le plus grand choix de figurines anime et manga au meilleur prix"
+                imageUrl="https://images.unsplash.com/photo-1578662996442-48f60103fc96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800"
+                linkUrl="https://www.amiami.com"
+                sponsor="AmiAmi"
                 size="medium"
               />
             </div>
@@ -219,7 +247,35 @@ const Figurines: React.FC = () => {
           <div className="lg:col-span-1">
             <AdSidebar
               title="Figurines populaires"
-              ads={sidebarAds}
+              ads={[
+                {
+                  id: "1",
+                  title: "Figurine Nezuko Demon Slayer",
+                  description: "Scale 1/7 par Good Smile Company",
+                  imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200",
+                  linkUrl: "https://www.goodsmile.info",
+                  price: "149,99€",
+                  rating: 4.8
+                },
+                {
+                  id: "2",
+                  title: "Nendoroid Goku",
+                  description: "Dragon Ball Z - Version Super Saiyan",
+                  imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200",
+                  linkUrl: "https://www.goodsmile.info",
+                  price: "59,99€",
+                  rating: 4.9
+                },
+                {
+                  id: "3",
+                  title: "Figurine Makima Chainsaw Man",
+                  description: "Scale 1/8 - Edition limitée",
+                  imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200",
+                  linkUrl: "https://www.kotobukiya.co.jp",
+                  price: "189,99€",
+                  rating: 4.7
+                }
+              ]}
             />
           </div>
         </div>
