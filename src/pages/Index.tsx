@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Search, ArrowRight } from 'lucide-react';
@@ -8,6 +7,8 @@ import Footer from '@/components/Footer';
 import CarouselFigurines from '@/components/CarouselFigurines';
 import ReleaseCalendar from '@/components/ReleaseCalendar';
 import NewsCard from '@/components/NewsCard';
+import AdBanner from '@/components/AdBanner';
+import AdSidebar from '@/components/AdSidebar';
 
 // Mock data for demonstration
 const latestFigurines = [
@@ -203,6 +204,54 @@ const latestNews = [
   },
 ];
 
+// Données publicitaires mockées
+const featuredAds = [
+  {
+    title: "AmiAmi - Import direct du Japon",
+    description: "Les dernières figurines en pré-commande avec livraison internationale sécurisée",
+    imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+    linkUrl: "https://amiami.com",
+    sponsor: "AmiAmi"
+  },
+  {
+    title: "HobbyLink Japan - Figurines Premium",
+    description: "Collection exclusive de figurines limitées et garage kits rares",
+    imageUrl: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+    linkUrl: "https://hlj.com",
+    sponsor: "HobbyLink Japan"
+  }
+];
+
+const sidebarAds = [
+  {
+    id: '1',
+    title: 'Nendoroid Gojo Satoru',
+    description: 'En pré-commande maintenant',
+    imageUrl: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200',
+    linkUrl: 'https://goodsmile.info',
+    price: '54.90€',
+    rating: 4.8
+  },
+  {
+    id: '2',
+    title: 'Figma Levi Ackerman',
+    description: 'Nouvelle version avec accessoires',
+    imageUrl: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200',
+    linkUrl: 'https://maxfactory.com',
+    price: '89.90€',
+    rating: 4.9
+  },
+  {
+    id: '3',
+    title: 'Scale Figure Makima',
+    description: 'Figurine échelle 1/7 premium',
+    imageUrl: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200',
+    linkUrl: 'https://kotobukiya.co.jp',
+    price: '149.90€',
+    rating: 4.7
+  }
+];
+
 const Index: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
@@ -269,14 +318,31 @@ const Index: React.FC = () => {
             title="Dernières figurines ajoutées" 
           />
 
+          {/* Publicité Banner */}
+          <section className="my-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {featuredAds.map((ad, index) => (
+                <AdBanner
+                  key={index}
+                  title={ad.title}
+                  description={ad.description}
+                  imageUrl={ad.imageUrl}
+                  linkUrl={ad.linkUrl}
+                  sponsor={ad.sponsor}
+                  size="medium"
+                />
+              ))}
+            </div>
+          </section>
+
           {/* Popular Figurines */}
           <CarouselFigurines 
             figurines={popularFigurines} 
             title="Figurines populaires" 
           />
 
-          {/* Two Column Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-12">
+          {/* Two Column Section with Ads */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mt-12">
             {/* Release Calendar */}
             <div className="lg:col-span-2">
               <ReleaseCalendar
@@ -299,6 +365,14 @@ const Index: React.FC = () => {
                   <NewsCard key={news.id} {...news} />
                 ))}
               </div>
+            </div>
+
+            {/* Sidebar Ads */}
+            <div>
+              <AdSidebar
+                title="Figurines Recommandées"
+                ads={sidebarAds}
+              />
             </div>
           </div>
           
