@@ -1,12 +1,14 @@
-
 import React, { useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
-import { Calendar, Filter, Search } from 'lucide-react';
-import NewsCard from '@/components/NewsCard';
+import { Calendar, Tag, User, Clock } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import NewsCard from '@/components/NewsCard';
+import AdBanner from '@/components/AdBanner';
+import AdSidebar from '@/components/AdSidebar';
 
 // Types d'articles
 const articleTypes = [
@@ -91,7 +93,40 @@ const newsData = [
   },
 ];
 
-const News = () => {
+const News: React.FC = () => {
+  const { t } = useLanguage();
+
+  // Publicités pour la page news
+  const newsAds = [
+    {
+      title: "Magazine Figure World",
+      description: "Abonnez-vous au magazine spécialisé figurines et recevez les dernières actualités",
+      imageUrl: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+      linkUrl: "https://www.figureworld.com",
+      sponsor: "Figure World"
+    }
+  ];
+
+  const sidebarAds = [
+    {
+      id: "1",
+      title: "Convention Japan Expo",
+      description: "Billets en vente - 30% de réduction",
+      imageUrl: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200",
+      linkUrl: "https://www.japan-expo-paris.com",
+      price: "15€",
+      rating: 4.9
+    },
+    {
+      id: "2",
+      title: "Cours de peinture figurines",
+      description: "Apprenez les techniques professionnelles",
+      imageUrl: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200",
+      linkUrl: "https://www.figurineschool.com",
+      price: "89€"
+    }
+  ];
+
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('all');
   const [selectedLicense, setSelectedLicense] = useState('all');
@@ -117,136 +152,154 @@ const News = () => {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Actualités Figurines</h1>
+    <div className="min-h-screen bg-gray-50">
+      <Header />
       
-      {/* Filtres */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-          <Input
-            placeholder="Rechercher..."
-            className="pl-10"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-8">Actualités Figurines</h1>
+        
+        {/* Filtres */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <Input
+              placeholder="Rechercher..."
+              className="pl-10"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+          
+          <div className="flex items-center space-x-2">
+            <Filter className="text-gray-400 h-4 w-4" />
+            <Select value={selectedType} onValueChange={(value) => setSelectedType(value)}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Type d'article" />
+              </SelectTrigger>
+              <SelectContent>
+                {articleTypes.map((type) => (
+                  <SelectItem key={type.id} value={type.id}>
+                    {type.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          
+          <div className="flex items-center space-x-2">
+            <Calendar className="text-gray-400 h-4 w-4" />
+            <Select value={selectedLicense} onValueChange={(value) => setSelectedLicense(value)}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Licence" />
+              </SelectTrigger>
+              <SelectContent>
+                {licenses.map((license) => (
+                  <SelectItem key={license.id} value={license.id}>
+                    {license.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        
+        {/* Filtres actifs */}
+        {(selectedType !== 'all' || selectedLicense !== 'all' || searchTerm) && (
+          <div className="flex flex-wrap gap-2 mb-6">
+            {selectedType !== 'all' && (
+              <Badge variant="outline" className="bg-gray-100">
+                {articleTypes.find(t => t.id === selectedType)?.name}
+                <button className="ml-1" onClick={() => setSelectedType('all')}>×</button>
+              </Badge>
+            )}
+            {selectedLicense !== 'all' && (
+              <Badge variant="outline" className="bg-gray-100">
+                {licenses.find(l => l.id === selectedLicense)?.name}
+                <button className="ml-1" onClick={() => setSelectedLicense('all')}>×</button>
+              </Badge>
+            )}
+            {searchTerm && (
+              <Badge variant="outline" className="bg-gray-100">
+                "{searchTerm}"
+                <button className="ml-1" onClick={() => setSearchTerm('')}>×</button>
+              </Badge>
+            )}
+          </div>
+        )}
+        
+        {/* Liste d'actualités */}
+        {currentItems.length === 0 ? (
+          <Card className="my-8">
+            <CardContent className="flex items-center justify-center py-12">
+              <p className="text-gray-500 text-center">
+                Aucune actualité ne correspond à votre recherche.<br />
+                Essayez avec d'autres critères.
+              </p>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-8">
+            {currentItems.map((article) => (
+              <NewsCard
+                key={article.id}
+                id={article.id}
+                title={article.title}
+                excerpt={article.excerpt}
+                image={article.image}
+                date={article.date}
+                category={article.category}
+                slug={article.slug}
+              />
+            ))}
+          </div>
+        )}
+        
+        {/* Publicité avant les actualités */}
+        <div className="mb-8">
+          <AdBanner
+            title={newsAds[0].title}
+            description={newsAds[0].description}
+            imageUrl={newsAds[0].imageUrl}
+            linkUrl={newsAds[0].linkUrl}
+            sponsor={newsAds[0].sponsor}
+            size="medium"
           />
         </div>
         
-        <div className="flex items-center space-x-2">
-          <Filter className="text-gray-400 h-4 w-4" />
-          <Select value={selectedType} onValueChange={(value) => setSelectedType(value)}>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Type d'article" />
-            </SelectTrigger>
-            <SelectContent>
-              {articleTypes.map((type) => (
-                <SelectItem key={type.id} value={type.id}>
-                  {type.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        
-        <div className="flex items-center space-x-2">
-          <Calendar className="text-gray-400 h-4 w-4" />
-          <Select value={selectedLicense} onValueChange={(value) => setSelectedLicense(value)}>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Licence" />
-            </SelectTrigger>
-            <SelectContent>
-              {licenses.map((license) => (
-                <SelectItem key={license.id} value={license.id}>
-                  {license.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-      
-      {/* Filtres actifs */}
-      {(selectedType !== 'all' || selectedLicense !== 'all' || searchTerm) && (
-        <div className="flex flex-wrap gap-2 mb-6">
-          {selectedType !== 'all' && (
-            <Badge variant="outline" className="bg-gray-100">
-              {articleTypes.find(t => t.id === selectedType)?.name}
-              <button className="ml-1" onClick={() => setSelectedType('all')}>×</button>
-            </Badge>
-          )}
-          {selectedLicense !== 'all' && (
-            <Badge variant="outline" className="bg-gray-100">
-              {licenses.find(l => l.id === selectedLicense)?.name}
-              <button className="ml-1" onClick={() => setSelectedLicense('all')}>×</button>
-            </Badge>
-          )}
-          {searchTerm && (
-            <Badge variant="outline" className="bg-gray-100">
-              "{searchTerm}"
-              <button className="ml-1" onClick={() => setSearchTerm('')}>×</button>
-            </Badge>
-          )}
-        </div>
-      )}
-      
-      {/* Liste d'actualités */}
-      {currentItems.length === 0 ? (
-        <Card className="my-8">
-          <CardContent className="flex items-center justify-center py-12">
-            <p className="text-gray-500 text-center">
-              Aucune actualité ne correspond à votre recherche.<br />
-              Essayez avec d'autres critères.
-            </p>
-          </CardContent>
-        </Card>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-8">
-          {currentItems.map((article) => (
-            <NewsCard
-              key={article.id}
-              id={article.id}
-              title={article.title}
-              excerpt={article.excerpt}
-              image={article.image}
-              date={article.date}
-              category={article.category}
-              slug={article.slug}
-            />
-          ))}
-        </div>
-      )}
-      
-      {/* Pagination */}
-      {filteredNews.length > itemsPerPage && (
-        <Pagination className="my-8">
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious 
-                onClick={() => currentPage > 1 && paginate(currentPage - 1)} 
-                className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
-              />
-            </PaginationItem>
-            
-            {Array.from({ length: totalPages }).map((_, index) => (
-              <PaginationItem key={index}>
-                <PaginationLink 
-                  isActive={currentPage === index + 1} 
-                  onClick={() => paginate(index + 1)}
-                >
-                  {index + 1}
-                </PaginationLink>
+        {/* Pagination */}
+        {filteredNews.length > itemsPerPage && (
+          <Pagination className="my-8">
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious 
+                  onClick={() => currentPage > 1 && paginate(currentPage - 1)} 
+                  className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                />
               </PaginationItem>
-            ))}
-            
-            <PaginationItem>
-              <PaginationNext 
-                onClick={() => currentPage < totalPages && paginate(currentPage + 1)} 
-                className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
-              />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
-      )}
+              
+              {Array.from({ length: totalPages }).map((_, index) => (
+                <PaginationItem key={index}>
+                  <PaginationLink 
+                    isActive={currentPage === index + 1} 
+                    onClick={() => paginate(index + 1)}
+                  >
+                    {index + 1}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+              
+              <PaginationItem>
+                <PaginationNext 
+                  onClick={() => currentPage < totalPages && paginate(currentPage + 1)} 
+                  className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        )}
+      </main>
+
+      <Footer />
     </div>
   );
 };
