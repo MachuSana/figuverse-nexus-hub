@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import AdBanner from '@/components/AdBanner';
 
 const Support: React.FC = () => {
   const { t } = useLanguage();
@@ -68,17 +67,6 @@ const Support: React.FC = () => {
     {
       icon: Lightbulb,
       title: t("suggest_content"),
-    }
-  ];
-
-  // Publicités contextuelles pour la page de soutien
-  const supportAds = [
-    {
-      title: "Ko-fi Gold - Soutenez vos créateurs préférés",
-      description: "Plateforme de soutien simple et sécurisée pour les créateurs de contenu",
-      imageUrl: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
-      linkUrl: "https://ko-fi.com",
-      sponsor: "Ko-fi"
     }
   ];
 
@@ -155,26 +143,6 @@ const Support: React.FC = () => {
                 </Card>
               );
             })}
-          </div>
-        </div>
-
-        {/* Publicité contextuelle */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-            Nos partenaires de soutien
-          </h2>
-          <div className="max-w-2xl mx-auto">
-            {supportAds.map((ad, index) => (
-              <AdBanner
-                key={index}
-                title={ad.title}
-                description={ad.description}
-                imageUrl={ad.imageUrl}
-                linkUrl={ad.linkUrl}
-                sponsor={ad.sponsor}
-                size="medium"
-              />
-            ))}
           </div>
         </div>
 
