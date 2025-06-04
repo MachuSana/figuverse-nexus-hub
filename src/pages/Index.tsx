@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Search, ArrowRight } from 'lucide-react';
+import { Search, ArrowRight, TrendingUp, Calendar, Users, Zap } from 'lucide-react';
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -209,92 +209,145 @@ const Index: React.FC = () => {
       <Header />
       
       <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-r from-gray-900 to-black text-white">
-          <div className="absolute inset-0 opacity-30 bg-[url('https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY4NTIzNzExOA&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center"></div>
-          <div className="relative container mx-auto px-4 py-16 md:py-24">
-            <div className="max-w-2xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                Votre univers de figurines manga, anime et jeux vidéo
+        {/* Modern Hero Section */}
+        <section className="relative bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white overflow-hidden">
+          <div className="absolute inset-0 bg-black/20"></div>
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY4NTIzNzExOA&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center opacity-10"></div>
+          
+          <div className="relative container mx-auto px-4 py-20 md:py-32">
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
+                <Zap className="h-4 w-4 mr-2 text-yellow-400" />
+                <span className="text-sm font-medium">Plus de 5000 figurines référencées</span>
+              </div>
+              
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                L'univers des
+                <span className="block text-figuverse-red">figurines</span>
               </h1>
-              <p className="text-lg mb-8">
-                Explorez, suivez et collectionnez vos figurines préférées
+              
+              <p className="text-xl md:text-2xl mb-10 text-gray-300 max-w-2xl mx-auto">
+                Découvrez, suivez et collectionnez vos figurines manga, anime et jeux vidéo préférées
               </p>
-              <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
                 <Link 
                   to="/figurines" 
-                  className="btn-primary py-3 px-6 text-center w-full sm:w-auto"
+                  className="bg-figuverse-red hover:bg-red-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 shadow-xl"
                 >
                   Explorer le catalogue
                 </Link>
                 <Link 
                   to="/planning" 
-                  className="bg-white text-gray-900 px-6 py-3 rounded-md hover:bg-opacity-90 transition-colors w-full sm:w-auto text-center"
+                  className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all border border-white/20"
                 >
-                  Voir le planning
+                  Voir les sorties
                 </Link>
+              </div>
+              
+              {/* Quick stats */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
+                {[
+                  { value: '5,250+', label: 'Figurines' },
+                  { value: '150+', label: 'Licences' },
+                  { value: '45+', label: 'Fabricants' },
+                  { value: '10k+', label: 'Membres' },
+                ].map((stat, index) => (
+                  <div key={index} className="text-center">
+                    <div className="text-2xl md:text-3xl font-bold text-figuverse-red">{stat.value}</div>
+                    <div className="text-sm text-gray-300">{stat.label}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* Search Section */}
-        <section className="bg-figuverse-gray-100 py-6">
+        {/* Enhanced Search Section */}
+        <section className="bg-gradient-to-b from-gray-50 to-white py-12 -mt-8 relative z-10">
           <div className="container mx-auto px-4">
-            <div className="bg-white rounded-lg shadow-md p-6 -mt-12 relative z-10 max-w-4xl mx-auto">
-              <h2 className="text-xl font-semibold mb-4 text-center">Rechercher une figurine</h2>
-              <div className="flex flex-col sm:flex-row gap-3">
+            <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-4xl mx-auto border border-gray-100">
+              <div className="text-center mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Trouvez votre figurine</h2>
+                <p className="text-gray-600">Recherchez parmi plus de 5000 références</p>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
                 <div className="relative flex-grow">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                   <input
                     type="text"
-                    placeholder="Nom, personnage, licence..."
-                    className="pl-10 pr-3 py-3 rounded-md border border-gray-200 w-full focus:outline-none focus:ring-2 focus:ring-figuverse-red focus:border-transparent"
+                    placeholder="Nom, personnage, licence, fabricant..."
+                    className="pl-12 pr-4 py-4 rounded-xl border border-gray-200 w-full focus:outline-none focus:ring-2 focus:ring-figuverse-red focus:border-transparent text-lg"
                   />
                 </div>
-                <button className="btn-primary px-6 py-3 flex items-center justify-center">
+                <button className="bg-figuverse-red hover:bg-red-600 text-white px-8 py-4 rounded-xl font-semibold flex items-center justify-center transition-colors">
                   <Search className="h-5 w-5 mr-2" />
                   Rechercher
                 </button>
+              </div>
+              
+              <div className="flex flex-wrap gap-2 mt-4 justify-center">
+                {['Nendoroid', 'Scale Figure', 'Figma', 'Good Smile Company', 'Attack on Titan'].map((tag) => (
+                  <button key={tag} className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors">
+                    {tag}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
         {/* Content Sections */}
-        <div className="section-container">
-          {/* Latest Figurines */}
-          <CarouselFigurines 
-            figurines={latestFigurines} 
-            title="Dernières figurines ajoutées" 
-          />
+        <div className="container mx-auto px-4 py-12">
+          {/* Latest Figurines with trending badge */}
+          <div className="mb-16">
+            <div className="flex items-center mb-6">
+              <TrendingUp className="h-6 w-6 text-figuverse-red mr-3" />
+              <h2 className="text-3xl font-bold">Dernières figurines ajoutées</h2>
+            </div>
+            <CarouselFigurines 
+              figurines={latestFigurines} 
+              title="" 
+            />
+          </div>
 
           {/* Popular Figurines */}
-          <CarouselFigurines 
-            figurines={popularFigurines} 
-            title="Figurines populaires" 
-          />
+          <div className="mb-16">
+            <div className="flex items-center mb-6">
+              <Users className="h-6 w-6 text-figuverse-red mr-3" />
+              <h2 className="text-3xl font-bold">Figurines populaires</h2>
+            </div>
+            <CarouselFigurines 
+              figurines={popularFigurines} 
+              title="" 
+            />
+          </div>
 
-          {/* Two Column Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-12">
+          {/* Two Column Section with better spacing */}
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-16">
             {/* Release Calendar */}
-            <div className="lg:col-span-2">
+            <div className="xl:col-span-2">
+              <div className="flex items-center mb-6">
+                <Calendar className="h-6 w-6 text-figuverse-red mr-3" />
+                <h2 className="text-3xl font-bold">Sorties à venir</h2>
+              </div>
               <ReleaseCalendar
                 releases={upcomingReleases}
-                title="Sorties à venir"
+                title=""
               />
             </div>
             
             {/* Latest News */}
             <div>
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold">Dernières actualités</h2>
-                <Link to="/news" className="text-sm font-medium text-figuverse-red hover:underline">
-                  Toutes les actualités
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-3xl font-bold">Actualités</h2>
+                <Link to="/news" className="text-figuverse-red hover:underline font-semibold">
+                  Voir tout
                 </Link>
               </div>
               
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {latestNews.map(news => (
                   <NewsCard key={news.id} {...news} />
                 ))}
@@ -302,64 +355,58 @@ const Index: React.FC = () => {
             </div>
           </div>
           
-          {/* Categories Showcase */}
-          <section className="my-12">
-            <h2 className="text-2xl font-bold mb-6">Explorer par catégories</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {/* Enhanced Categories Grid */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-8 text-center">Explorer par catégories</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
               {[
-                { name: 'Licences', icon: '🎬', link: '/licences', count: 150 },
-                { name: 'Fabricants', icon: '🏭', link: '/fabricants', count: 45 },
-                { name: 'Personnages', icon: '👾', link: '/personnages', count: 800 },
-                { name: 'Gammes', icon: '📦', link: '/gammes', count: 35 },
-                { name: 'Boutiques', icon: '🛒', link: '/boutiques', count: 25 },
+                { name: 'Licences', icon: '🎬', link: '/licences', count: 150, color: 'from-blue-500 to-purple-600' },
+                { name: 'Fabricants', icon: '🏭', link: '/fabricants', count: 45, color: 'from-green-500 to-blue-500' },
+                { name: 'Personnages', icon: '👾', link: '/personnages', count: 800, color: 'from-purple-500 to-pink-500' },
+                { name: 'Gammes', icon: '📦', link: '/gammes', count: 35, color: 'from-orange-500 to-red-500' },
+                { name: 'Boutiques', icon: '🛒', link: '/boutiques', count: 25, color: 'from-teal-500 to-green-500' },
               ].map(category => (
                 <Link 
                   key={category.name}
                   to={category.link}
-                  className="bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-shadow border border-gray-100 group"
+                  className="group relative bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 border border-gray-100"
                 >
-                  <span className="text-3xl mb-2 block">{category.icon}</span>
-                  <h3 className="font-medium text-gray-900 group-hover:text-figuverse-red transition-colors">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity`}></div>
+                  <span className="text-4xl mb-4 block transform group-hover:scale-110 transition-transform">{category.icon}</span>
+                  <h3 className="font-bold text-lg text-gray-900 group-hover:text-figuverse-red transition-colors mb-2">
                     {category.name}
                   </h3>
-                  <p className="text-sm text-gray-500">{category.count} items</p>
+                  <p className="text-sm text-gray-500 font-medium">{category.count} items</p>
                 </Link>
               ))}
             </div>
           </section>
           
-          {/* CTA Section */}
-          <section className="bg-figuverse-red text-white rounded-lg p-8 my-12 relative overflow-hidden">
-            <div className="absolute inset-0 bg-black opacity-20"></div>
-            <div className="relative z-10 max-w-xl">
-              <h2 className="text-3xl font-bold mb-4">Rejoignez notre communauté</h2>
-              <p className="mb-6">
-                Créez un compte pour suivre vos figurines préférées, recevoir des alertes de prix et bien plus encore.
+          {/* Modern CTA Section */}
+          <section className="relative bg-gradient-to-r from-figuverse-red to-red-600 text-white rounded-3xl p-12 mb-16 overflow-hidden">
+            <div className="absolute inset-0 bg-black/10"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-32 translate-x-32"></div>
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-24 -translate-x-24"></div>
+            
+            <div className="relative z-10 max-w-2xl">
+              <h2 className="text-4xl font-bold mb-4">Rejoignez notre communauté</h2>
+              <p className="text-xl mb-8 text-red-100">
+                Créez un compte pour suivre vos figurines préférées, recevoir des alertes de prix et découvrir les dernières sorties en avant-première.
               </p>
-              <Link 
-                to="/register" 
-                className="bg-white text-figuverse-red px-6 py-3 rounded-md inline-flex items-center font-medium hover:bg-opacity-90 transition-colors"
-              >
-                S'inscrire gratuitement <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </div>
-          </section>
-
-          {/* Stats Section */}
-          <section className="my-12">
-            <h2 className="text-2xl font-bold mb-6 text-center">FiguVerse en chiffres</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[
-                { value: '5,250+', label: 'Figurines' },
-                { value: '150+', label: 'Licences' },
-                { value: '45+', label: 'Fabricants' },
-                { value: '10,000+', label: 'Membres' },
-              ].map((stat, index) => (
-                <div key={index} className="bg-white rounded-lg p-6 text-center shadow-sm">
-                  <p className="text-3xl md:text-4xl font-bold text-figuverse-red mb-2">{stat.value}</p>
-                  <p className="text-gray-600">{stat.label}</p>
-                </div>
-              ))}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link 
+                  to="/register" 
+                  className="bg-white text-figuverse-red px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
+                >
+                  S'inscrire gratuitement <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+                <Link 
+                  to="/about" 
+                  className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-figuverse-red transition-colors inline-flex items-center justify-center"
+                >
+                  En savoir plus
+                </Link>
+              </div>
             </div>
           </section>
         </div>
